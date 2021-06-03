@@ -15,7 +15,7 @@ Plant Land::GetPlant()
     return plant_;
 }
 
-void Planting(const Plant plant)
+void Land::Planting(const Plant plant)
 {
     plant_ = plant;
 }
