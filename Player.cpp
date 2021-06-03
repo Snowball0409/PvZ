@@ -11,7 +11,7 @@ Player::~Player()
     //dtor
 }
 
-bool Player::Plant(const Plant plant)
+bool Player::Planting(const Plant plant)
 {
     //plant if money is enough
     if(money_ < plant.Price()) 
