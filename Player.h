@@ -9,7 +9,7 @@ class Player
     public:
         Player();
         virtual ~Player();
-        bool Plant(const Plant plant);
+        bool Planting(const Plant plant);
         void Move(const int loc);
 
     protected:
