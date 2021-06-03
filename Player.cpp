@@ -11,12 +11,12 @@ Player::~Player()
     //dtor
 }
 
-bool Player::Plant(const Plant plant)
+bool Player::Plant(const Land land)
 {
     //plant if money is enough
-    if(money_ < plant.Price()) 
+    if(money_ < land.Plant(loc_).Price()) 
         return false;
-    money_ -= plant.Price();
+    money_ -= land.Plant(loc_).Price();
     return true;
 }
 
