@@ -4,13 +4,13 @@
 
 class Plant{
     private:
-        int land_ = 0;
         int price_ = 0;
         int hp_ = 0;
     public:
         int Price()const{return price_;}
-        Plant(int land, int price, int hp);
+        Plant();
         ~Plant();
+        void Setup(int price, int hp);
         
 };
 
