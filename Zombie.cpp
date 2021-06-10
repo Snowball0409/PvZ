@@ -27,7 +27,18 @@ bool Zombie::IsDie()
     return false;
 }
 
-void Zombie::Move(const int loc)
+void Zombie::Move(const int offset, const int max)
 {
-    loc_ = loc;
+    loc_ += offset;
+    if(loc_ > max)loc_ %= max;
+}
+
+const int Zombie::Locate()
+{
+    return loc_;
+}
+
+const int Zombie::HealthPoint()
+{
+    return hp_;
 }
