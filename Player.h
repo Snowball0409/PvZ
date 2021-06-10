@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include <random>
-//#include "Plant.h"
+#include "Plant.h"
 
 class Player
 {
@@ -10,7 +10,10 @@ class Player
         Player();
         virtual ~Player();
         bool Planting(const Plant plant);
-        void Move(const int loc);
+        void Move(const int offset, const int max);
+
+        const int Locate();
+        const int Money();
 
     protected:
 

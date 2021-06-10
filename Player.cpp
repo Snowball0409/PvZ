@@ -20,8 +20,19 @@ bool Player::Planting(const Plant plant)
     return true;
 }
 
-void Player::Move(const int loc)
+void Player::Move(const int offset, const int max)
 {
     //move
-    loc_ = loc;
+    loc_ += offset;
+    if(loc_ > max) loc_ %= max;
+}
+
+const int Player::Locate()
+{
+    return loc_;
+}
+
+const int Player::Money()
+{
+    return money_;
 }
