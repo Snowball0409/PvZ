@@ -13,9 +13,12 @@ class Zombie
 		Zombie();
 		~Zombie();
 		void Damaged(const int damage);
-		const int Damage();
 		bool IsDie();
-		void Move(const int loc);
+		void Move(const int offset, const int max);
+		
+		const int Damage();
+		const int Locate();
+		const int HealthPoint();
 
 };
 #endif
