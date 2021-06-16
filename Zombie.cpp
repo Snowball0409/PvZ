@@ -42,3 +42,11 @@ int Zombie::HealthPoint() const
 {
     return hp_;
 }
+
+std::ostream &operator <<(std::ostream &os, const Zombie &zombie)
+{
+    os << "Damage: " << zombie.damage_;
+    os << "HP: ";
+    for(int i = 0;i < zombie.hp_;++ i) os << "*";
+    return os;
+}
