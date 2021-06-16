@@ -8,6 +8,7 @@ class Plant{
         int hp_ = 0;
     public:
         int Price()const{return price_;}
+        int Hp()const{return hp_;}
         Plant();
         ~Plant();
         Plant(int price, int hp);

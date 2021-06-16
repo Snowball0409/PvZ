@@ -10,3 +10,8 @@ CoinPlant::CoinPlant(){
 CoinPlant::~CoinPlant(){
 
 }
+
+std::ostream &operator<<(std::ostream &os, const CoinPlant &rhs){
+    os << "CoinPlant $" <<rhs.Price()<<" HP: "<<rhs.Hp()<<" - gives $"
+    <<rhs.Reward()<<" every "<<rhs.Visit()<<" rounds"<<std::endl;
+}

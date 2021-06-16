@@ -6,6 +6,7 @@
 
 
 class CoinPlant: public Plant{
+    friend std::ostream &operator<<(std::ostream &os, const CoinPlant &rhs);
     private:
         int reward_ = 100;
         int visit_ = 2;
