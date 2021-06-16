@@ -19,3 +19,9 @@ void Land::Planting(const Plant plant)
 {
     plant_ = plant;
 }
+
+std::ostream& Land::operator <<(ostream &os, const Land &land)
+{
+    os << plant_;
+    return os;
+}
