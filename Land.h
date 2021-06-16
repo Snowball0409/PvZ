@@ -6,7 +6,7 @@
 	
 class Land  
 {
-	friend std::ostream& operator <<(ostream &os, const Land &land);
+	friend std::ostream& operator <<(std::ostream &os, const Land &land);
 
 	private:
 		Plant plant_;
