@@ -16,9 +16,9 @@ class Zombie
 		bool IsDie();
 		void Move(const int offset, const int max);
 		
-		const int Damage();
-		const int Locate();
-		const int HealthPoint();
+		int Damage() const;
+		int Locate() const;
+		int HealthPoint() const;
 
 };
 #endif

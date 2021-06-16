@@ -15,7 +15,7 @@ void Zombie::Damaged(const int damage)
     hp_ -= damage;
 }
 
-const int Zombie::Damage()
+int Zombie::Damage() const
 {
     return damage_;
 }
@@ -33,12 +33,12 @@ void Zombie::Move(const int offset, const int max)
     if(loc_ > max)loc_ %= max;
 }
 
-const int Zombie::Locate()
+int Zombie::Locate() const
 {
     return loc_;
 }
 
-const int Zombie::HealthPoint()
+int Zombie::HealthPoint() const
 {
     return hp_;
 }
