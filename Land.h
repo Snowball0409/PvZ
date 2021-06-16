@@ -2,9 +2,12 @@
 #define LAND_H
 
 #include "Plant.h"
+#include <iostream>
 	
 class Land  
 {
+	friend std::ostream& operator <<(ostream &os, const Land &land);
+
 	private:
 		Plant plant_;
 
