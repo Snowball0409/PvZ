@@ -1,8 +1,12 @@
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
+
+#include <iostream>
 	
 class Zombie  
 {
+	friend std::ostream &operator <<(std::ostream &os, const Zombie &zombie);
+
 	private:
 		int hp_;
 		int loc_;
