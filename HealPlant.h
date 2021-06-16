@@ -5,6 +5,7 @@
 #include "HealPlant.h"
 
 class HealPlant: public Plant{
+    friend std::ostream &operator<<(std::ostream &os, const HealPlant &rhs);
     private:
         int healPoint_ = 20;
     public:

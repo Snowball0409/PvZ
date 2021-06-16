@@ -5,6 +5,7 @@
 #include "Plant.h"
 
 class BombPlant: public Plant{
+    friend std::ostream &operator<<(std::ostream &os, const BombPlant &rhs);
     private:
         int damage_ = 50;
     public:
