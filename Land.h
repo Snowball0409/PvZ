@@ -2,6 +2,8 @@
 #define LAND_H
 
 #include "Plant.h"
+#include "Player.h"
+#include "Zombie.h"
 #include <iostream>
 	
 class Land  
@@ -16,6 +18,8 @@ class Land
 		~Land();
 		Plant GetPlant();
 		void Planting(const Plant plant);
+		void Visit(Player &player);
+		void Visit(Zombie &zombie);
 
 };
 #endif
