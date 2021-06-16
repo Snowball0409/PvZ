@@ -27,12 +27,12 @@ void Player::Move(const int offset, const int max)
     if(loc_ > max) loc_ %= max;
 }
 
-const int Player::Locate()
+int Player::Locate() const
 {
     return loc_;
 }
 
-const int Player::Money()
+int Player::Money() const
 {
     return money_;
 }

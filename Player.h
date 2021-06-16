@@ -12,8 +12,8 @@ class Player
         bool Planting(const Plant plant);
         void Move(const int offset, const int max);
 
-        const int Locate();
-        const int Money();
+        int Locate() const;
+        int Money() const;
 
     protected:
 
