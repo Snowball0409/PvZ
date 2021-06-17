@@ -1,14 +1,18 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player():money_(150),loc_(0)
 {
-    money_ = 150;
-    loc_ = 0;
+
+}
+
+Player::Player(int money, int loc):money_(money),loc_(loc)
+{
+
 }
 
 Player::~Player()
 {
-    //dtor
+
 }
 
 bool Player::Planting(const Plant plant)

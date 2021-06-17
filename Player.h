@@ -9,6 +9,7 @@ class Player
 {
     public:
         Player();
+        Player(int money, int loc);
         virtual ~Player();
         bool Planting(const Plant plant);
         void Move(const int offset, const int max);
