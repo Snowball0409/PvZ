@@ -2,7 +2,7 @@
 	
 Land::Land()
 {
-	//create empty plant
+
 }
 	
 Land::~Land()
@@ -10,26 +10,42 @@ Land::~Land()
 	
 }
 
-Plant Land::GetPlant()
+Plant& Land::Plant()
 {
     return plant_;
 }
 
 void Land::Planting(const Plant plant)
 {
+    //plant on empty land
     plant_ = plant;
 }
 
 void Land::Visit(Player &player)
 {
     //if plant exist&has visit method, visit
-    plant_.Visiting(player);
+    /* Visit plant */
 }
 
 void Land::Visit(Zombie &zombie)
 {
     //if plant exist, battle
-    
+    if(plant_.Name()!="Empty")
+    {
+        /*battle*/
+        cout << "Zombie eats plant " << plant_.Name() << "and causes damage " << zombie.Damage() << " .";
+        this->Update();
+    }
+}
+
+void Land::Update()
+{
+    //if plant dead, delete it and print messeage
+    if(plant_.Hp()<=0)
+    {
+        cout << "Plant " << plant_.Name() << " is dead!" << endl;
+        /*delete plant and recreate*/
+    }
 }
 
 std::ostream& operator <<(std::ostream &os, const Land &land)
