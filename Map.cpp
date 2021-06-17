@@ -52,10 +52,10 @@ void Map::Show()
 	for(int i = 0; i < landN_; ++ i)
 	{
 		std::cout << "[" << i << "]" << "{";
-		std::cout << (playerLoc_==i)?"*":" ";
+		(playerLoc_==i)?std::cout << "*":std::cout << " ";
 		for(int j = 0; j < zombieN_; ++ j)
 		{
-			std::cout << (zombieLoc_[j]==i)?std::to_string(j):" ";
+			(zombieLoc_[j]==i)?std::cout << std::to_string(j):std::cout << " ";
 		}
 		std::cout << "}";
 		std::cout << lands_[i] << std::endl;
