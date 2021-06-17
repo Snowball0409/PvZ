@@ -18,9 +18,16 @@ int main()
     //////////////////////////////////////////////////////////////////////////////////
     //create class
     cout << "Init class test..." << endl;
+    /* Don't change yourself */
     int landN = 8;
     int zombieN = 3;
-    Plant p0;
+    int hp = 15;
+    int damage = 5;
+    int loc = 0;
+    int price = 50;
+    /*************************/
+
+    Plant p0(price, hp, "TestPlant");
     BombPlant p1;
     CoinPlant p2;
     HealPlant p3;
@@ -28,7 +35,7 @@ int main()
 
     Player player;
     Zombie zombies[3];
-    Zombie zombie(15,5);//don't change
+    Zombie zombie(hp, damage, loc);
     Land land;
     Map map(landN, player, zombieN, zombies);
     //////////////////////////////////////////////////////////////////////////////////
@@ -48,12 +55,13 @@ int main()
     try{
         //planting test
         while(player.Planting(p0))cout << "Plant: " << p0.Name() << ", Last: " << player.Money() << endl;
+        cout << "Except: Last < " << price << endl;
 
         //moving test
         player.Move(1, landN);
-        cout << "Locate: " << player.Locate() << ", Except: 1" << endl;
+        cout << "Locate: " << player.Locate() << ", Except: " << (loc+1)%landN << endl;
         player.Move(7, landN);
-        cout << "Locate: " << player.Locate() << ", Except: 0" << endl;
+        cout << "Locate: " << player.Locate() << ", Except: " << (loc+8)%landN << endl;
 
     }catch(const exception e)
     {
@@ -75,10 +83,10 @@ int main()
 
         //damaged
         zombie.Damaged(10);
-        cout << "Zombie hp: " << zombie.HealthPoint() << ", Except: 5" << endl;
+        cout << "Zombie hp: " << zombie.HealthPoint() << ", Except: " << hp-10 << endl;
 
         //attack
-        cout << "ATK: " << zombie.Damage() << ", Except: 5" << endl;
+        cout << "ATK: " << zombie.Damage() << ", Except: " << damage << endl;
 
         //isdie
         zombie.Damaged(1000);
@@ -86,9 +94,9 @@ int main()
 
         //move
         zombie.Move(1, landN);
-        cout << "Locate: " << zombie.Locate() << ", Except: " << (zombie.Locate()+1)%landN << endl;
-        zombies[0].Move(7, landN);
-        cout << "Locate: " << zombie.Locate() << ", Except: " << (zombie.Locate()+7)%landN << endl;
+        cout << "Locate: " << zombie.Locate() << ", Except: " << (loc+1)%landN << endl;
+        zombie.Move(7, landN);
+        cout << "Locate: " << zombie.Locate() << ", Except: " << (loc+8)%landN << endl;
 
     }catch(const exception e)
     {
@@ -101,11 +109,12 @@ int main()
     try{
         //map show
         map.Show();
+        cout << "Except: Map Data" << endl;
 
         //planting
         map.Planting(p1, 0);
         map.Show();
-        cout << "Except: [0]{*    }" << p1.Name();
+        cout << "Except: [0]{*012}" << p1.Name();
 
         //Visit
 
