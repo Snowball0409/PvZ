@@ -23,7 +23,7 @@ void Land::Planting(const Plant plant)
 void Land::Visit(Player &player)
 {
     //if plant exist&has visit method, visit
-    plant_.Visiting(player);
+    //plant_.Visiting(player);
 }
 
 void Land::Visit(Zombie &zombie)
