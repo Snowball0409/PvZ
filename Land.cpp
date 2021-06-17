@@ -10,7 +10,7 @@ Land::~Land()
 	
 }
 
-Plant& Land::Plant()
+Plant& Land::GetPlant()
 {
     return plant_;
 }

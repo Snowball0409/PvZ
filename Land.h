@@ -16,7 +16,7 @@ class Land
 	public:
 		Land();
 		~Land();
-		Plant& Plant();
+		Plant& GetPlant();
 		void Planting(const Plant plant);
 		void Visit(Player &player);
 		void Visit(Zombie &zombie);
