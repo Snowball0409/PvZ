@@ -1,6 +1,11 @@
 #include "Zombie.h"  
-	
+
 Zombie::Zombie():hp_(15),damage_(15)
+{
+	
+}
+	
+Zombie::Zombie(int hp, int damage):hp_(hp),damage_(damage)
 {
 	
 }
