@@ -16,10 +16,11 @@ class Land
 	public:
 		Land();
 		~Land();
-		Plant GetPlant();
+		Plant& Plant();
 		void Planting(const Plant plant);
 		void Visit(Player &player);
 		void Visit(Zombie &zombie);
+		void Update();
 
 };
 #endif
