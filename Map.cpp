@@ -57,6 +57,7 @@ void Map::Show()
 		{
 			std::cout << (zombieLoc_[j]==i)?std::to_string(j):" ";
 		}
+		std::cout << "}";
 		std::cout << lands_[i] << std::endl;
 	}
 }
