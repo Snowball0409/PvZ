@@ -30,7 +30,7 @@ bool Zombie::IsDie()
 void Zombie::Move(const int offset, const int max)
 {
     loc_ += offset;
-    if(loc_ > max)loc_ %= max;
+    if(loc_ >= max)loc_ %= max;
 }
 
 int Zombie::Damage() const
