@@ -13,6 +13,12 @@ Rules：
 
 2. 父類別和衍生類別檔案分開
 
+3. Use the override keyword to check prototypes.
+
+4. Call base class’s constructors properly.
+
+5. Make the destructor in the base class virtual.
+
 剩下就照老師講的rule(像哪邊要加const之類的)
 
 然後盡量可以加上註解
