@@ -28,7 +28,7 @@ void Player::Move(const int offset, const int max)
 {
     //move
     loc_ += offset;
-    if(loc_ > max) loc_ %= max;
+    if(loc_ >= max) loc_ %= max;
 }
 
 void Player::Reward(const int &money)
