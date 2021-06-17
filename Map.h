@@ -16,6 +16,9 @@ class Map
 		int playerLoc_;
 		int* zombieLoc_;
 
+		int landN_;
+		int zombieN_;
+
 	public:
 
 		Map(const int landN, const Player &player, const int zombieN, const Zombie *zombies);

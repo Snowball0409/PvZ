@@ -5,10 +5,13 @@ Map::Map(const int landN, const Player &player, const int zombieN, const Zombie 
 	lands_ = new Land[landN];
 	playerLoc_ = player.Locate();
 	zombieLoc_ = new int[zombieN];
-	for(int i = 0;i < zombieN;++i)
+	for(int i = 0; i < zombieN; ++i)
 	{
 		zombieLoc_[i] = zombies[i].Locate();
 	}
+
+	landN_ = landN;
+	zombieN_ = zombieN;
 }
 	
 Map::~Map()
@@ -46,11 +49,11 @@ void Map::Planting(const Plant &plant, const int index)
 
 void Map::Show()
 {
-	for(int i = 0;i < sizeof(lands_)/sizeof(Land);++ i)
+	for(int i = 0; i < landN_; ++ i)
 	{
 		std::cout << "[" << i << "]" << "{";
 		std::cout << (playerLoc_==i)?"*":" ";
-		for(int j = 0;j < sizeof(zombieLoc_)/sizeof(int);++ j)
+		for(int j = 0; j < zombieN_; ++ j)
 		{
 			std::cout << (zombieLoc_[j]==i)?std::to_string(j):" ";
 		}
