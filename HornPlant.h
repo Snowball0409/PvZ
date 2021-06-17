@@ -7,11 +7,11 @@
 class HornPlant: public Plant{
     friend std::ostream &operator<<(std::ostream &os, const HornPlant &rhs);
     private:
-        int damage_ = 10;
+        int damage_;                                          
     public:
         int Damage()const{return damage_;}
-        HornPlant();
-        HornPlant(int price, int hp, int damage) : Plant(price, hp), damage_(damage){}
+        HornPlant() : damage_(10){}
+        HornPlant(int price, int hp, int damage) : Plant(price, hp, "HornPlant"), damage_(damage){}
         ~HornPlant();
 };
 

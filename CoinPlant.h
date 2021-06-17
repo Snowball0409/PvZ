@@ -8,12 +8,14 @@
 class CoinPlant: public Plant{
     friend std::ostream &operator<<(std::ostream &os, const CoinPlant &rhs);
     private:
-        int reward_ = 100;
-        int visit_ = 2;
+        int reward_;
+        int visit_;
+        int step_;
     public:
         int Reward()const{return reward_;}
         int Visit()const{return visit_;}
-        CoinPlant();
-        CoinPlant(int price, int hp, int reward, int visit) : Plant(price, hp), reward_(reward), visit_(visit){}
+        void Visiting();
+        CoinPlant() : reward_(100), visit_(2), step_(2){}
+        CoinPlant(int price, int hp, int reward, int visit) : Plant(price, hp, "CoinPlant"), reward_(reward), visit_(visit){}
         ~CoinPlant();
 };

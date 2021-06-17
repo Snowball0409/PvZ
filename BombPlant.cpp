@@ -3,11 +3,6 @@
 #include "BombPlant.h"
 
 
-
-BombPlant::BombPlant(){
-    damage_ = 50;
-}
-
 BombPlant::~BombPlant(){
 
 }
