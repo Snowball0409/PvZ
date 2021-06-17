@@ -15,6 +15,7 @@ class Zombie
 	public:
 
 		Zombie();
+		Zombie(int hp, int damage);
 		~Zombie();
 		void Damaged(const int damage);
 		bool IsDie();
