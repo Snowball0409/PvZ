@@ -23,11 +23,13 @@ void Land::Planting(const Plant plant)
 void Land::Visit(Player &player)
 {
     //if plant exist&has visit method, visit
+    plant_.Visiting(player);
 }
 
 void Land::Visit(Zombie &zombie)
 {
     //if plant exist, battle
+    
 }
 
 std::ostream& operator <<(std::ostream &os, const Land &land)
