@@ -11,6 +11,7 @@ CoinPlant::~CoinPlant(){
 std::ostream &operator<<(std::ostream &os, const CoinPlant &rhs){
     os << "CoinPlant $" <<rhs.Price()<<" HP: "<<rhs.MAX_HP[rhs.Type()]<<" - gives $"
     <<rhs.Reward()<<" every "<<rhs.Visit()<<" rounds"<<std::endl;
+    return os;
 }
 
 void CoinPlant:: Visiting(){
