@@ -33,7 +33,7 @@ void Map::Update(Zombie &zombie, const int index)
 
 void Map::Visit(Player &player)
 {
-	lands_[playerLoc_].Visit(player);
+	lands_[playerLoc_].Visit(player, lands_, landN_);
 }
 
 void Map::Visit(Zombie &zombie, const int index)
