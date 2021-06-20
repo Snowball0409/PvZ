@@ -41,7 +41,7 @@ void Map::Visit(Zombie &zombie, const int index)
 	lands_[zombieLoc_[index]].Visit(zombie);
 }
 
-void Map::Planting(const Plant &plant, const int index)
+void Map::Planting(Plant* plant, const int index)
 {
 	//plant on index land
 	lands_[index].Planting(plant);

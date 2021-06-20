@@ -31,7 +31,7 @@ class Map
 		void Visit(Zombie &zombie, const int index);
 		static const int Random();
 		void Show();
-		void Planting(const Plant &plant, const int index);
+		void Planting(Plant* plant, const int index);
 
 };
 #endif
