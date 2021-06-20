@@ -38,5 +38,6 @@ class Plant{
         virtual int Step() = 0;
         virtual int Reward() = 0;
         virtual int HealPoint() = 0;
+        virtual void Visiting() = 0;
 };
 
