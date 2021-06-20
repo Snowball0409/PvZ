@@ -25,6 +25,7 @@ class Plant{
         int Price()const{return price_;}
         int Hp()const{return hp_;}
         enum plantType Type()const{return type_;}
+        std::string Name()const{return name_;}
         Plant() : price_(0), hp_(0), type_(EMPTY),name_("Empty"){}
         ~Plant();
         Plant(int price, int hp, enum plantType type, std::string name): price_(price), hp_(hp), type_(type), name_(name){}
@@ -32,6 +33,10 @@ class Plant{
         void Injured(int damage);
         static int PRICE[PLANT_NUMBER];
         static int MAX_HP[PLANT_NUMBER];
-      
+        virtual int Damage() = 0;
+        virtual int Visit() = 0;
+        virtual int Step() = 0;
+        virtual int Reward() = 0;
+        virtual int HealPoint() = 0;
 };
 
