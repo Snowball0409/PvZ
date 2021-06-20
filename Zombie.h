@@ -2,6 +2,8 @@
 #define ZOMBIE_H
 
 #include <iostream>
+#include <random>
+#include <ctime>
 	
 class Zombie  
 {
@@ -14,7 +16,7 @@ class Zombie
 
 	public:
 
-		Zombie();
+		Zombie(int landN);
 		Zombie(int &hp, const int &damage, int &loc);
 		~Zombie();
 		void Damaged(const int damage);

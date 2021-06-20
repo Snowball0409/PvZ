@@ -1,8 +1,10 @@
 #include "Zombie.h"  
 
-Zombie::Zombie():hp_(15),damage_(15),loc_(0)
+Zombie::Zombie(int landN):hp_(15),damage_(15)
 {
-	
+	//random init locate
+    srand(time(0));
+    loc_ = rand()%landN;
 }
 	
 Zombie::Zombie(int &hp, const int &damage, int &loc):hp_(hp),damage_(damage),loc_(loc)
