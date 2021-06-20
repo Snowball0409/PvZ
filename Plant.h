@@ -24,7 +24,7 @@ class Plant{
     public:
         int Price()const{return price_;}
         int Hp()const{return hp_;}
-        enum plantType type()const{return type_;}
+        enum plantType Type()const{return type_;}
         Plant() : price_(0), hp_(0), type_(EMPTY),name_("Empty"){}
         ~Plant();
         Plant(int price, int hp, enum plantType type, std::string name): price_(price), hp_(hp), type_(type), name_(name){}
