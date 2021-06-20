@@ -11,16 +11,18 @@ class Land
 	friend std::ostream& operator <<(std::ostream &os, const Land &land);
 
 	private:
-		Plant plant_;
+		Plant* plant_;
 
 	public:
 		Land();
 		~Land();
-		Plant& GetPlant();
-		void Planting(const Plant plant);
-		void Visit(Player &player);
+		Plant* GetPlant();
+		void Planting(Plant* plant);
+		void Visit(Player &player, Land* lands, const int &landN);
 		void Visit(Zombie &zombie);
 		void Update();
+		void Replant();
+		void Healing(Land* lands, const int &landN, const int &healPoint);
 
 };
 #endif
