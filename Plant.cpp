@@ -1,7 +1,7 @@
 #include "Plant.h"
 #include <iostream>
 
-int Plant::MAX_HP[4]={0,0,0,0};
+int Plant::MAX_HP[4]={50,50,50,50};
 
 Plant::~Plant(){
     
