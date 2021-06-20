@@ -26,22 +26,29 @@ int main()
     int damage = 5;
     int loc = 0;
     int price = 50;
+    int money = 150;
+    int reward = 25;
+    int bombDamage = 50;
+    int visit = 2;
+    int healPoint = 20;
     /*************************/
 
     Plant p0(price, hp, EMPTY, "TestPlant");
-    BombPlant p1;
-    CoinPlant p2;
-    HealPlant p3;
-    HornPlant p4;
+    Plant p01;
+    BombPlant p1(price, hp, bombDamage);
+    CoinPlant p2(price, hp, reward, visit);
+    HealPlant p3(price, hp, healPoint);
+    HornPlant p4(price, hp, damage);
 
-    Player player(landN);
+    Player player(money, loc);
+    Player player2(landN);
     vector<Zombie*> zombies;
     for(size_t i = 0;i < zombieN;++i)
     {
-        Zombie* z = new Zombie(landN);
+        Zombie* z = new Zombie(hp, damage, loc);
         zombies.push_back(z);
     }
-    Zombie zombie(hp, damage, loc);
+    Zombie zombie(landN);
     Land land;
     Map map(landN, player, zombieN, zombies);
     //////////////////////////////////////////////////////////////////////////////////
@@ -49,6 +56,37 @@ int main()
     cout << "//////////////////////////////////////////////////////////////////////////////////" << endl;
     cout << "Planting test..." << endl;
     try{
+        //Data show
+        cout << "Base: p0" << endl;
+        cout << "Price: " << p0.Price() << " Except: " << price << endl;
+        cout << "Hp: " << p0.Hp() << " Except: " << hp << endl;
+        cout << "Type: " << p0.Type() << " Except: " << EMPTY << endl;
+        cout << "Name: " << p0.Name() << " Except: TestPlant" << endl;
+
+        //Injured
+        p0.Injured(damage);
+        cout << "HP: " << p0.Hp() << " Except: " << hp-damage << endl;
+        p0.Injured(99999);
+        cout << "HP: " << p0.Hp() << " Except: 0" << endl;
+
+        //Healing
+        p0.Healing(1);
+        cout << "HP: " << p0.Hp() << " Except: " << hp-damage+1 << endl;
+        p0.Healing(99999);
+        cout << "HP: " << p0.Hp() << " Except: " << hp << endl;
+
+        //Damage
+        
+
+        //Visit
+
+        //Step
+
+        //Reward
+
+        //HealPoint
+
+        //Visiting
 
     }catch(const exception e)
     {
@@ -83,7 +121,7 @@ int main()
         {
             if(!zombies[i]->IsDie())
             {
-                cout << '[' << i << ']' << zombies[i] << endl;
+                cout << '[' << i << ']' << *zombies[i] << endl;
             }
         }
 
@@ -119,9 +157,15 @@ int main()
 
         //planting
         map.Planting(&p1, 0);
+        map.Planting(&p2, 1);
+        map.Planting(&p3, 2);
+        map.Planting(&p4, 3);
         map.Show();
-        cout << "Except: [0]{*012}" << p1.Name();
-
+        cout << "Except: " << endl;
+        cout << "[0]{*012}" << p1.Name() << endl;
+        cout << "[1]{    }" << p2.Name() << endl;
+        cout << "[2]{    }" << p3.Name() << endl;
+        cout << "[3]{    }" << p4.Name() << endl;
         //Visit
 
         //Update
