@@ -1,13 +1,13 @@
 #include "Map.h"  
 	
-Map::Map(const int landN, const Player &player, const int zombieN, const Zombie *zombies)
+Map::Map(const int landN, const Player &player, const int zombieN, const std::vector<Zombie*> &zombies)
 {
 	lands_ = new Land[landN];
 	playerLoc_ = player.Locate();
 	zombieLoc_ = new int[zombieN];
 	for(size_t i = 0; i < zombieN; ++i)
 	{
-		zombieLoc_[i] = zombies[i].Locate();
+		zombieLoc_[i] = zombies[i]->Locate();
 	}
 
 	landN_ = landN;

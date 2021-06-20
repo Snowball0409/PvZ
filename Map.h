@@ -8,6 +8,7 @@
 #include <string>
 #include <random>
 #include <ctime>
+#include <vector>
 	
 class Map  
 {
@@ -21,7 +22,7 @@ class Map
 
 	public:
 
-		Map(const int landN, const Player &player, const int zombieN, const Zombie *zombies);
+		Map(const int landN, const Player &player, const int zombieN, const std::vector<Zombie*> &zombies);
 		~Map();
 
 		void Update(Player &player);
