@@ -5,7 +5,7 @@
 
 constexpr int PLANT_NUMBER = 4;
 
-enum plantName{
+enum plantType{
     HEAL_PLANT,
     COIN_PLANT,
     BOMB_PLANT,
@@ -13,18 +13,21 @@ enum plantName{
     EMPTY
 };
 
+const std::string plantName[PLANT_NUMBER]={"Healflower","Mushroom","Bombflower","Hornflower"};
+
 class Plant{
     private:
         int price_;
         int hp_;
-        enum plantName name_ = EMPTY;
+        enum plantType type_ = EMPTY;
+        std::string name_ = "Empty";
     public:
         int Price()const{return price_;}
         int Hp()const{return hp_;}
-        enum plantName name()const{return name_;}
-        Plant() : price_(0), hp_(0){}
+        enum plantType type()const{return type_;}
+        Plant() : price_(0), hp_(0), type_(EMPTY),name_("Empty"){}
         ~Plant();
-        Plant(int price, int hp, enum plantName name);
+        Plant(int price, int hp, enum plantType type, std::string name): price_(price), hp_(hp), type_(type), name_(name){}
         void Healing(int healPoint);
         void Injured(int damage);
         static int PRICE[PLANT_NUMBER];
