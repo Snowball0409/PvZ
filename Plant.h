@@ -21,6 +21,7 @@ class Plant{
     public:
         int Price()const{return price_;}
         int Hp()const{return hp_;}
+        enum plantName name()const{return name_;}
         Plant() : price_(0), hp_(0){}
         ~Plant();
         Plant(int price, int hp, enum plantName name);
