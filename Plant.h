@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLANT_H
+#define PLANT_H
 
 #include <iostream>
 #include <string>
@@ -41,3 +42,4 @@ class Plant{
         virtual void Visiting(){}
 };
 
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COINPLANT_H
+#define COINPLANT_H
 
 #include <iostream>
 #include "Plant.h"
@@ -20,3 +21,5 @@ class CoinPlant: public Plant{
         CoinPlant(int price, int hp, int reward, int visit) : Plant(price, hp, COIN_PLANT, plantName[COIN_PLANT]), reward_(reward), visit_(visit){}
         ~CoinPlant();
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef HORNPLANT_H
+#define HORNPLANT_H
 
 #include <iostream>
 #include "Plant.h"
@@ -15,4 +16,4 @@ class HornPlant: public Plant{
         ~HornPlant();
 };
 
-
+#endif

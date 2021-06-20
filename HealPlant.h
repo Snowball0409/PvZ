@@ -1,4 +1,5 @@
-#pragma once
+#ifndef HEALPLANT_H
+#define HEALPLANT_H
 
 #include <iostream>
 #include "Plant.h"
@@ -14,3 +15,6 @@ class HealPlant: public Plant{
         HealPlant(int price, int hp, int healPoint) : Plant(price, hp, HEAL_PLANT, plantName[HEAL_PLANT]), healPoint_(healPoint){}
         ~HealPlant();
 };
+
+
+#endif

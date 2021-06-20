@@ -1,5 +1,5 @@
-
-#pragma once
+#ifndef BOMBPLANT_H
+#define BOMBPLANT_H
 
 #include <iostream>
 #include "Plant.h"
@@ -15,3 +15,5 @@ class BombPlant: public Plant{
         ~BombPlant();
 
 };
+
+#endif
