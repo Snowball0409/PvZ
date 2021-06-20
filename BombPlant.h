@@ -11,7 +11,7 @@ class BombPlant: public Plant{
     public:
         int Damage()const{return damage_;}
         BombPlant() : damage_(50){}
-        BombPlant(int price, int hp, int damage) : Plant(price, hp, "BombPlant"), damage_(damage){}
+        BombPlant(int price, int hp, int damage) : Plant(price, hp, BOMB_PLANT, plantName[BOMB_PLANT]), damage_(damage){}
         ~BombPlant();
 
 };

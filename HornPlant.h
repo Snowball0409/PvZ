@@ -11,7 +11,7 @@ class HornPlant: public Plant{
     public:
         int Damage()const{return damage_;}
         HornPlant() : damage_(10){}
-        HornPlant(int price, int hp, int damage) : Plant(price, hp, "HornPlant"), damage_(damage){}
+        HornPlant(int price, int hp, int damage) : Plant(price, hp, HORN_PLANT, "Hornflower"), damage_(damage){}
         ~HornPlant();
 };
 

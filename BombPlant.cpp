@@ -8,6 +8,6 @@ BombPlant::~BombPlant(){
 }
 
 std::ostream &operator<<(std::ostream &os, const BombPlant &rhs){
-    os << "BombPlant $" <<rhs.Price()<<" HP: "<<rhs.Hp()<<" - gives "
+    os << "BombPlant $" <<rhs.Price()<<" HP: "<<rhs.MAX_HP[rhs.Type()]<<" - gives "
     <<rhs.Damage()<<" damage points"<<std::endl;
 }
