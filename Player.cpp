@@ -33,7 +33,6 @@ void Player::Move(const int offset, const int max)
 void Player::Reward(const int &money)
 {
     money_ += money;
-    std::cout << "You have earned $" << money << "! Now you have $" << money_ << std::endl;
 }
 
 int Player::Locate() const
