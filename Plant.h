@@ -32,7 +32,6 @@ class Plant{
         Plant(int price, int hp, enum plantType type, std::string name): price_(price), hp_(hp), type_(type), name_(name){}
         void Healing(int healPoint);
         void Injured(int damage);
-        static int PRICE[PLANT_NUMBER];
         static int MAX_HP[PLANT_NUMBER];
         virtual int Damage(){return 0;}
         virtual int Visit(){return 0;}
