@@ -1,14 +1,13 @@
 #include "Player.h"
 
-Player::Player():money_(150),loc_(0)
+Player::Player(int landN):money_(150)
 {
-
+    //random init locate
+    srand(time(0));
+    loc_ = rand()%landN;
 }
 
-Player::Player(int money, int loc):money_(money),loc_(loc)
-{
-
-}
+Player::Player(int money, int loc):money_(money),loc_(loc){}
 
 Player::~Player()
 {
