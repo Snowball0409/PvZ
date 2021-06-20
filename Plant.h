@@ -14,7 +14,7 @@ enum plantType{
     EMPTY
 };
 
-const std::string plantName[PLANT_NUMBER]={"Healflower","Mushroom","Bombflower","Hornflower"};
+static std::string plantName[PLANT_NUMBER]={"Healflower","Mushroom","Bombflower","Hornflower"};
 
 class Plant{
     private:
