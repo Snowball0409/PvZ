@@ -16,6 +16,6 @@ class CoinPlant: public Plant{
         int Visit()const{return visit_;}
         void Visiting();
         CoinPlant() : reward_(100), visit_(2), step_(2){}
-        CoinPlant(int price, int hp, int reward, int visit) : Plant(price, hp, "CoinPlant"), reward_(reward), visit_(visit){}
+        CoinPlant(int price, int hp, int reward, int visit) : Plant(price, hp, COIN_PLANT), reward_(reward), visit_(visit){}
         ~CoinPlant();
 };
