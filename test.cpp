@@ -10,6 +10,7 @@
 #include "HornPlant.h"
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -27,14 +28,19 @@ int main()
     int price = 50;
     /*************************/
 
-    Plant p0(price, hp, "TestPlant");
+    Plant p0(price, hp, EMPTY, "TestPlant");
     BombPlant p1;
     CoinPlant p2;
     HealPlant p3;
     HornPlant p4;
 
-    Player player;
-    Zombie zombies[3];
+    Player player(landN);
+    vector<Zombie*> zombies;
+    for(size_t i = 0;i < zombieN;++i)
+    {
+        Zombie* z = new Zombie(landN);
+        zombies.push_back(z);
+    }
     Zombie zombie(hp, damage, loc);
     Land land;
     Map map(landN, player, zombieN, zombies);
@@ -75,7 +81,7 @@ int main()
         //zombie show
         for(size_t i = 0;i < 3;++ i)
         {
-            if(!zombies[i].IsDie())
+            if(!zombies[i]->IsDie())
             {
                 cout << '[' << i << ']' << zombies[i] << endl;
             }
@@ -112,7 +118,7 @@ int main()
         cout << "Except: Map Data" << endl;
 
         //planting
-        map.Planting(p1, 0);
+        map.Planting(&p1, 0);
         map.Show();
         cout << "Except: [0]{*012}" << p1.Name();
 
