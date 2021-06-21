@@ -3,7 +3,6 @@
 Zombie::Zombie(int landN):hp_(15),damage_(15)
 {
 	//random init locate
-    srand(time(0));
     loc_ = rand()%landN;
 }
 	

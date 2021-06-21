@@ -2,8 +2,7 @@
 #define ZOMBIE_H
 
 #include <iostream>
-#include <random>
-#include <ctime>
+#include <cstdlib>
 	
 class Zombie  
 {
