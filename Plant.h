@@ -33,11 +33,11 @@ class Plant{
         void Healing(int healPoint);
         void Injured(int damage);
         static int MAX_HP[PLANT_NUMBER];
-        virtual int Damage(){return 0;}
-        virtual int Visit(){return 0;}
-        virtual int Step(){return 0;}
-        virtual int Reward(){return 0;}
-        virtual int HealPoint(){return 0;}
+        virtual int Damage() = 0;
+        virtual int Visit() = 0;
+        virtual int Step() = 0;
+        virtual int Reward() = 0;
+        virtual int HealPoint() = 0;
         virtual void Visiting(){}
         virtual void Show(){}
 };
