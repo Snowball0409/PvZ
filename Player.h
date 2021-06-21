@@ -1,9 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <random>
-#include <ctime>
 #include <iostream>
+#include <cstdlib>
 #include "Plant.h"
 
 class Player
@@ -12,7 +11,7 @@ class Player
         Player(int landN);
         Player(int money, int loc);
         virtual ~Player();
-        bool Planting(const Plant plant);
+        bool Planting(const Plant &plant);
         void Move(const int offset, const int max);
         void Reward(const int &money);
 
@@ -24,7 +23,6 @@ class Player
     private:
         int money_;
         int loc_;
-
 };
 
 #endif // PLAYER_H

@@ -3,8 +3,7 @@
 Player::Player(int landN):money_(150)
 {
     //random init locate
-    srand(time(0));
-    loc_ = rand()%landN;
+    loc_ = rand()%8;
 }
 
 Player::Player(int money, int loc):money_(money),loc_(loc){}
@@ -14,7 +13,7 @@ Player::~Player()
 
 }
 
-bool Player::Planting(const Plant plant)
+bool Player::Planting(const Plant &plant)
 {
     //plant if money is enough
     if(money_ < plant.Price()) 
