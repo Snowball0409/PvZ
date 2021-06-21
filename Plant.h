@@ -39,6 +39,7 @@ class Plant{
         virtual int Reward(){return 0;}
         virtual int HealPoint(){return 0;}
         virtual void Visiting(){}
+        virtual void Show(){}
 };
 
 #endif

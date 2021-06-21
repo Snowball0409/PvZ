@@ -7,7 +7,6 @@
 
 
 class CoinPlant: public Plant{
-    friend std::ostream &operator<<(std::ostream &os, const CoinPlant &rhs);
     private:
         int reward_;
         int visit_;
@@ -21,6 +20,7 @@ class CoinPlant: public Plant{
         CoinPlant(int price, int hp, int reward, int visit) : Plant(price, hp, COIN_PLANT, plantName[COIN_PLANT]), reward_(reward), step_(reward), visit_(visit){}
         CoinPlant(int price, int hp, int reward, int visit, std::string name) : Plant(price, hp, COIN_PLANT, name), reward_(reward), step_(reward), visit_(visit){}
         ~CoinPlant();
+        void Show();
 };
 
 #endif
