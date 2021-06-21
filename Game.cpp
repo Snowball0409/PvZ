@@ -22,7 +22,7 @@ Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_L
             iss >> plantType >> plantName >> plantCostStr  >> plantHp;
             plantCost = stoi(plantCostStr.substr(1));
             plantMinCost_ = std::min(plantMinCost_, plantCost);
-            printf("plantType:%s plantName:%s plantCost:%d plantHp:%d ", plantType.c_str(), plantName.c_str(), plantCost, plantHp);
+            // printf("plantType:%s plantName:%s plantCost:%d plantHp:%d ", plantType.c_str(), plantName.c_str(), plantCost, plantHp);
             switch (plantType[0])
             {
                 case 'C':
@@ -136,7 +136,7 @@ bool Game::PlantActValid(int plantType)
     }
     return ret;
 }
-void Game::PlayerPlay()
+void Game::PlayerPlant()
 {
     if (EnoughCost())
     {
@@ -226,7 +226,7 @@ void Game::Play()
     PrintMap();
     PrintZombies();
     PrintPlants();
-    PlayerPlay();
+    PlayerPlant();
     ZombiesMove();
     PlayerMove();
     system("CLS");

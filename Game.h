@@ -23,7 +23,7 @@ private:
     void PrintPlants() const;
     void ZombiesMove();
     void PlayerMove();
-    void PlayerPlay();
+    void PlayerPlant();
     bool success_;
     size_t lastAction_;
     bool EnoughCost() {return player_->Money() > plantMinCost_;}
