@@ -12,7 +12,7 @@
 	
 class Map  
 {
-	friend std::ostream& operator <<(const std::ostream& os, const Map &map);
+	friend std::ostream& operator <<(std::ostream& os, const Map &map);
 
 	private:
 		Land* lands_;

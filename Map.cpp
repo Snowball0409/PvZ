@@ -47,7 +47,7 @@ void Map::Planting(Plant* plant, const int index)
 	lands_[index].Planting(plant);
 }
 
-std::ostream& operator <<(const std::ostream& os, const Map &map)
+std::ostream& operator <<(std::ostream& os, const Map &map)
 {
 	for(size_t i = 0; i < map.landN_; ++ i)
 	{
