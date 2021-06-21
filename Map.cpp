@@ -58,7 +58,7 @@ std::ostream& operator <<(std::ostream& os, const Map &map)
 			(map.zombieLoc_[j]==i)?os << std::to_string(j):os << " ";
 		}
 		os << "}";
-		os << map.lands_[i];
+		os << map.lands_[i] << std::endl;
 	}
 	return os;
 }
