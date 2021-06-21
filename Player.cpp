@@ -3,7 +3,7 @@
 Player::Player(int landN):money_(150)
 {
     //random init locate
-    loc_ = rand()%8;
+    loc_ = rand()%landN;
 }
 
 Player::Player(int money, int loc):money_(money),loc_(loc){}
