@@ -49,16 +49,16 @@ void Map::Planting(Plant* plant, const int index)
 
 std::ostream& operator <<(const std::ostream& os, const Map &map)
 {
-	for(size_t i = 0; i < landN_; ++ i)
+	for(size_t i = 0; i < map.landN_; ++ i)
 	{
 		os << "[" << i << "]" << "{";
-		(playerLoc_==i)?os << "*":os << " ";
-		for(size_t j = 0; j < zombieN_; ++ j)
+		(map.playerLoc_==i)?os << "*":os << " ";
+		for(size_t j = 0; j < map.zombieN_; ++ j)
 		{
-			(zombieLoc_[j]==i)?os << std::to_string(j):os << " ";
+			(map.zombieLoc_[j]==i)?os << std::to_string(j):os << " ";
 		}
 		os << "}";
-		os << lands_[i];
+		os << map.lands_[i];
 	}
 	return os;
 }
