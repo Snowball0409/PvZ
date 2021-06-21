@@ -19,6 +19,11 @@ Map::~Map()
 	
 }
 
+Plant* Map::GetPlant(const int index)
+{
+	return land_[index].GetPlant(); 
+}
+
 void Map::Update(Player &player)
 {
 	//update locate
