@@ -7,14 +7,14 @@
 constexpr int PLANT_NUMBER = 4;
 
 enum plantType{
-    HEAL_PLANT,
     COIN_PLANT,
-    BOMB_PLANT,
     HORN_PLANT,
+    BOMB_PLANT,
+    HEAL_PLANT,
     EMPTY
 };
 
-static std::string plantName[PLANT_NUMBER]={"Healflower","Mushroom","Bombflower","Hornflower"};
+static std::string plantName[PLANT_NUMBER]={"Mushroom","Hornflower","Bombflower","Healflower"};
 
 class Plant{
     private:
