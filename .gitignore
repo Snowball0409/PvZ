@@ -4,4 +4,23 @@ makefile
 *.exe
 *.o
 *.gch
+coding rules
 plants.txt
+Plant.h
+Plant.cpp
+BombPlant.cpp
+BombPlant.h
+CoinPlant.cpp
+CoinPlant.h
+HealPlant.cpp
+HealPlant.h
+HornPlant.cpp
+HornPlant.h
+Land.cpp
+Land.h
+Map.cpp
+Map.h
+Player.cpp
+Player.h
+Zombie.cpp
+Zombie.h
