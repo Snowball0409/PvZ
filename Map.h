@@ -4,6 +4,7 @@
 #include "Land.h"
 #include "Player.h"
 #include "Zombie.h"
+#include "Plant.h"
 #include <iostream>
 #include <string>
 #include <random>
@@ -33,6 +34,7 @@ class Map
 		void Visit(Zombie &zombie, const int index);
 		static const int Random();
 		void Planting(Plant* plant, const int index);
+		Plant* GetPlant(const int index);
 
 };
 #endif
