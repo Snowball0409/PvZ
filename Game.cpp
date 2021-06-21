@@ -121,6 +121,7 @@ bool Game::PlantActValid(int plantType)
         basicPlants_[HORN_PLANT]->Hp(), basicPlants_[HORN_PLANT]->Damage());
         break;
     default:
+        printf("Unknow Plant Type\n");
         break;
     }
     if (player_->Planting(*landPlant))
@@ -131,7 +132,7 @@ bool Game::PlantActValid(int plantType)
     }
     else
     {
-        std::cout << "Not Enough Money! Please input again!\n";
+        std::cout << "Not Enough Money! Please input again !\n";
         system("Pause");
     }
     return ret;
@@ -170,7 +171,7 @@ void Game::PlayerPlant()
     }
     else
     {
-        std::cout << "You don't have enough money to plant anything!";
+        std::cout << "You don't have enough money to plant anything !\n";
     }
     system("Pause");
     system("CLS");
