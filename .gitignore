@@ -1,0 +1,9 @@
+mymain.cpp
+main.cpp
+makefile
+*.exe
+*.o
+*.gch
+plants.txt
+HornPlant.o
+Plant.o
