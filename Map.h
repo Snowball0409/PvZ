@@ -12,6 +12,8 @@
 	
 class Map  
 {
+	friend std::ostream& operator <<(const std::ostream& os, const Map &map);
+
 	private:
 		Land* lands_;
 		int playerLoc_;
@@ -30,7 +32,6 @@ class Map
 		void Visit(Player &player);
 		void Visit(Zombie &zombie, const int index);
 		static const int Random();
-		void Show();
 		void Planting(Plant* plant, const int index);
 
 };

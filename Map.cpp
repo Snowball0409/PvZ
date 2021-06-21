@@ -47,17 +47,18 @@ void Map::Planting(Plant* plant, const int index)
 	lands_[index].Planting(plant);
 }
 
-void Map::Show()
+std::ostream& operator <<(const std::ostream& os, const Map &map)
 {
 	for(size_t i = 0; i < landN_; ++ i)
 	{
-		std::cout << "[" << i << "]" << "{";
-		(playerLoc_==i)?std::cout << "*":std::cout << " ";
+		os << "[" << i << "]" << "{";
+		(playerLoc_==i)?os << "*":os << " ";
 		for(size_t j = 0; j < zombieN_; ++ j)
 		{
-			(zombieLoc_[j]==i)?std::cout << std::to_string(j):std::cout << " ";
+			(zombieLoc_[j]==i)?os << std::to_string(j):os << " ";
 		}
-		std::cout << "}";
-		std::cout << lands_[i] << std::endl;
+		os << "}";
+		os << lands_[i];
 	}
+	return os;
 }
