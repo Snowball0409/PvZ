@@ -20,6 +20,7 @@ private:
     void GameSetUp();
     void PrintZombies() const;
     void PrintMap() const;
+    void PrintPlants() const;
     void ZombiesMove();
     void PlayerMove();
     void PlayerPlay();

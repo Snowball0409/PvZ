@@ -51,11 +51,8 @@ Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_L
                     std::cout << "Unknown Plant Type " << plantType << std::endl;
                     break;
             }
+            basicPlants_[i]->Show();
         }
-        //waiting for plain virtual show()
-        // for (int i = 0; i < NUM_OF_PLANT_TYPES; ++i) {
-        //     std::cout << basicPlants_[i] << "\n";
-        // }
         GameSetUp();
         player_ = new Player(numOfLand_);
         for (size_t i = 0; i < numOfZombie_; ++i) {
@@ -190,6 +187,15 @@ void Game::PrintZombies() const
     }
     std::cout << "===========================\n";
 }
+void Game::PrintPlants() const
+{
+    //waiting for plain virtual show()
+    for (int i = 0; i < NUM_OF_PLANT_TYPES; ++i) {
+        printf("[%d] ", i);
+        basicPlants_[i]->Show();
+    }
+    printf("\n");
+}
 void Game::ZombiesMove()
 {
     for (size_t i = 0; i < zombies_.size(); ++i)
@@ -200,8 +206,8 @@ void Game::ZombiesMove()
             zombies_[i]->Move(rand(), numOfLand_);
             map_->Update(*zombies_[i], i);
             PrintMap();
-            map_->Visit(*zombies_[i], i);
             PrintZombies();
+            map_->Visit(*zombies_[i], i);
             printf("Zombie [%d] moves to land %d.\n", i, zombies_[i]->Locate());
             system("Pause");
             system("CLS");
@@ -219,10 +225,7 @@ void Game::Play()
 {
     PrintMap();
     PrintZombies();
-    //waiting for plain virtual show()
-    // for (int i = 0; i < NUM_OF_PLANT_TYPES; ++i) {
-    //     std::cout << basicPlants_[i] << "\n";
-    // }
+    PrintPlants();
     PlayerPlay();
     ZombiesMove();
     PlayerMove();

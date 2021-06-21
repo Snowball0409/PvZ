@@ -7,8 +7,7 @@ HornPlant::~HornPlant(){
 
 }
 
-std::ostream &operator<<(std::ostream &os, const HornPlant &rhs){
-    os << "HornPlant $" <<rhs.Price()<<" HP: "<<rhs.MAX_HP[rhs.Type()]<<" - gives "
-    <<rhs.Damage()<<" damage points"<<std::endl;
-    return os;
+void HornPlant::Show(){
+    std::cout << "HornPlant $" << Price() << " HP: " << MAX_HP[Type()] << " - gives "
+    << Damage() << " damage points" << std::endl;
 }

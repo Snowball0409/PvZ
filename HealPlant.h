@@ -6,7 +6,6 @@
 #include "HealPlant.h"
 
 class HealPlant: public Plant{
-    friend std::ostream &operator<<(std::ostream &os, const HealPlant &rhs);
     private:
         int healPoint_;
     public:
@@ -15,6 +14,7 @@ class HealPlant: public Plant{
         HealPlant(int price, int hp, int healPoint) : Plant(price, hp, HEAL_PLANT, plantName[HEAL_PLANT]), healPoint_(healPoint){}
         HealPlant(int price, int hp, int healPoint, std::string name) : Plant(price, hp, HEAL_PLANT, name), healPoint_(healPoint){}
         ~HealPlant();
+        void Show();
 };
 
 

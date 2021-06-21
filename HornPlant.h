@@ -6,7 +6,6 @@
 #include "HornPlant.h"
 
 class HornPlant: public Plant{
-    friend std::ostream &operator<<(std::ostream &os, const HornPlant &rhs);
     private:
         int damage_;                                          
     public:
@@ -15,6 +14,7 @@ class HornPlant: public Plant{
         HornPlant(int price, int hp, int damage) : Plant(price, hp, HORN_PLANT, plantName[HORN_PLANT]), damage_(damage){}
         HornPlant(int price, int hp, int damage, std::string name) : Plant(price, hp, HORN_PLANT, name), damage_(damage){}
         ~HornPlant();
+        void Show();
 };
 
 #endif
