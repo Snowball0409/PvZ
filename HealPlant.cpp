@@ -7,6 +7,6 @@ HealPlant::~HealPlant(){
 }
 
 void HealPlant:: Show(){
-    std::cout << "HealPlant $" << Price() << " HP: " << MAX_HP[Type()] << " - gives all your plants "
+    std::cout << Name() << " $" << Price() << " HP: " << MAX_HP[Type()] << " - gives all your plants "
     << HealPoint() << " HP back" <<std::endl;
 }

@@ -18,6 +18,6 @@ void CoinPlant:: Visiting(){
 }
 
 void CoinPlant::Show(){
-    std::cout << "CoinPlant $" << Price() << " HP: " << MAX_HP[Type()] << " - gives $"
+    std::cout << Name() << " $" << Price() << " HP: " << MAX_HP[Type()] << " - gives $"
     << Reward() << " every " << Visit() << " rounds" <<std::endl;
 }
