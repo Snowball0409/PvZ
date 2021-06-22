@@ -9,7 +9,7 @@ class HealPlant: public Plant{
     private:
         int healPoint_;
     public:
-        int HealPoint()const{return healPoint_;}
+        virtual int HealPoint()const{return healPoint_;}
         HealPlant() : healPoint_(20){}
         HealPlant(int price, int hp, int healPoint) : Plant(price, hp, HEAL_PLANT, plantName[HEAL_PLANT]), healPoint_(healPoint){}
         HealPlant(int price, int hp, int healPoint, std::string name) : Plant(price, hp, HEAL_PLANT, name), healPoint_(healPoint){}
