@@ -8,6 +8,6 @@ HornPlant::~HornPlant(){
 }
 
 void HornPlant::Show(){
-    std::cout << "HornPlant $" << Price() << " HP: " << MAX_HP[Type()] << " - gives "
+    std::cout << Name() << " $" << Price() << " HP: " << MAX_HP[Type()] << " - gives "
     << Damage() << " damage points" << std::endl;
 }
