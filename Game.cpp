@@ -22,29 +22,37 @@ Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_L
             iss >> plantType >> plantName >> plantCostStr  >> plantHp;
             plantCost = stoi(plantCostStr.substr(1));
             plantMinCost_ = std::min(plantMinCost_, plantCost);
-            // printf("plantType:%s plantName:%s plantCost:%d plantHp:%d ", plantType.c_str(), plantName.c_str(), plantCost, plantHp);
+            printf("plantType:%s plantName:%s plantCost:%d plantHp:%d ", plantType.c_str(), plantName.c_str(), plantCost, plantHp);
             switch (plantType[0])
             {
                 case 'C':
                     int visit, reward;
                     iss >> visit >> reward;
                     printf("visit:%d reward:%d\n", visit, reward);
+                    //Plant::plantName[COIN_PLANT] = plantName;
+                    Plant::MAX_HP[COIN_PLANT] = plantHp;
                     basicPlants_.push_back(new CoinPlant(plantCost, plantHp, reward, visit, plantName));
                     break;
                 case 'S':
                     int dmg;
                     iss >> dmg;
                     printf("dmg:%d\n", dmg);
+                    //Plant::plantName[HORN_PLANT] = plantName;
+                    Plant::MAX_HP[HORN_PLANT] = plantHp;
                     basicPlants_.push_back(new HornPlant(plantCost, plantHp, dmg, plantName));
                     break;
                 case 'B':
                     printf("\n");
+                    //Plant::plantName[BOMB_PLANT] = plantName;
+                    Plant::MAX_HP[BOMB_PLANT] = plantHp;
                     basicPlants_.push_back(new BombPlant(plantCost, plantHp, plantHp, plantName));
                     break;
                 case 'H':
                     int health;
                     iss >> health;
                     printf("health:%d\n", health);
+                    //Plant::plantName[HEAL_PLANT] = plantName;
+                    Plant::MAX_HP[HEAL_PLANT] = plantHp;
                     basicPlants_.push_back(new HealPlant(plantCost, plantHp, health, plantName));
                     break;
                 default:
