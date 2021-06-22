@@ -21,7 +21,7 @@ Map::~Map()
 
 Plant* Map::GetPlant(const int index)
 {
-	return land_[index].GetPlant(); 
+	return lands_[index].GetPlant(); 
 }
 
 void Map::Update(Player &player)
