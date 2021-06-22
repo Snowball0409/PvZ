@@ -20,7 +20,7 @@ class Plant{
     private:
         int price_;
         int hp_;
-        enum plantType type_ = EMPTY;
+        enum plantType type_ = EMPTY ;
         std::string name_ = "Empty";
     public:
         int Price()const{return price_;}
