@@ -5,7 +5,9 @@
 #include <sstream>
 #include <cstdio>
 constexpr char Game::fileName[];
-Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_LAND}, plantMinCost_{INT_MAX}, lastAction_{NUM_OF_PLANT_TYPES}
+Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_LAND}, 
+plantMinCost_{INT_MAX}, lastAction_{NUM_OF_PLANT_TYPES}, isWin_{false}, isLose_{false},
+bombFlowerUsed_{0}
 {
     std::ifstream inputFile(fileName, std::ios::in);
     if (!inputFile)
@@ -22,13 +24,13 @@ Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_L
             iss >> plantType >> plantName >> plantCostStr  >> plantHp;
             plantCost = stoi(plantCostStr.substr(1));
             plantMinCost_ = std::min(plantMinCost_, plantCost);
-            printf("plantType:%s plantName:%s plantCost:%d plantHp:%d ", plantType.c_str(), plantName.c_str(), plantCost, plantHp);
+            //printf("plantType:%s plantName:%s plantCost:%d plantHp:%d ", plantType.c_str(), plantName.c_str(), plantCost, plantHp);
             switch (plantType[0])
             {
                 case 'C':
                     int visit, reward;
                     iss >> visit >> reward;
-                    printf("visit:%d reward:%d\n", visit, reward);
+                    //printf("visit:%d reward:%d\n", visit, reward);
                     //Plant::plantName[COIN_PLANT] = plantName;
                     Plant::MAX_HP[COIN_PLANT] = plantHp;
                     basicPlants_.push_back(new CoinPlant(plantCost, plantHp, reward, visit, plantName));
@@ -36,13 +38,13 @@ Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_L
                 case 'S':
                     int dmg;
                     iss >> dmg;
-                    printf("dmg:%d\n", dmg);
+                    //printf("dmg:%d\n", dmg);
                     //Plant::plantName[HORN_PLANT] = plantName;
                     Plant::MAX_HP[HORN_PLANT] = plantHp;
                     basicPlants_.push_back(new HornPlant(plantCost, plantHp, dmg, plantName));
                     break;
                 case 'B':
-                    printf("\n");
+                    //printf("\n");
                     //Plant::plantName[BOMB_PLANT] = plantName;
                     Plant::MAX_HP[BOMB_PLANT] = plantHp;
                     basicPlants_.push_back(new BombPlant(plantCost, plantHp, plantHp, plantName));
@@ -50,7 +52,7 @@ Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_L
                 case 'H':
                     int health;
                     iss >> health;
-                    printf("health:%d\n", health);
+                    //printf("health:%d\n", health);
                     //Plant::plantName[HEAL_PLANT] = plantName;
                     Plant::MAX_HP[HEAL_PLANT] = plantHp;
                     basicPlants_.push_back(new HealPlant(plantCost, plantHp, health, plantName));
@@ -59,7 +61,6 @@ Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_L
                     std::cout << "Unknown Plant Type " << plantType << std::endl;
                     break;
             }
-            basicPlants_[i]->Show();
         }
         GameSetUp();
         player_ = new Player(numOfLand_);
@@ -121,6 +122,7 @@ bool Game::PlantActValid(int plantType)
         basicPlants_[HEAL_PLANT]->HealPoint(), basicPlants_[HEAL_PLANT]->Name());
         break;
     case BOMB_PLANT:
+        ++bombFlowerUsed_;
         landPlant = new BombPlant(basicPlants_[BOMB_PLANT]->Price(), 
         basicPlants_[BOMB_PLANT]->Hp(), basicPlants_[BOMB_PLANT]->Damage(), basicPlants_[BOMB_PLANT]->Name());
         break;
@@ -145,9 +147,10 @@ bool Game::PlantActValid(int plantType)
     }
     return ret;
 }
+
 void Game::PlayerPlant()
 {
-    if (EnoughCost())
+    if (EnoughCost() && EmptyLand())
     {
         bool optInValid = true;
         do {
@@ -158,7 +161,6 @@ void Game::PlayerPlant()
             std::istringstream iss(userInput);
             iss >> action;
             if (action >= NUM_OF_PLANT_TYPES) {action = lastAction_;}
-            printf("Action : %d\n", action);
             if (action == NUM_OF_PLANT_TYPES)
             {
                 //checkGame
@@ -184,10 +186,12 @@ void Game::PlayerPlant()
     system("Pause");
     system("CLS");
 }
+
 void Game::PrintMap() const 
 {
     std::cout << *map_ << "---------------------------\n";
 }
+
 void Game::PrintZombies() const
 {
     std::cout << "Zombie information:\n";
@@ -196,6 +200,7 @@ void Game::PrintZombies() const
     }
     std::cout << "===========================\n";
 }
+
 void Game::PrintPlants() const
 {
     //waiting for plain virtual show()
@@ -205,6 +210,7 @@ void Game::PrintPlants() const
     }
     printf("\n");
 }
+
 void Game::ZombiesMove()
 {
     for (size_t i = 0; i < zombies_.size(); ++i)
@@ -212,24 +218,75 @@ void Game::ZombiesMove()
         if (!zombies_[i]->IsDie())
         {
             srand(time(NULL));
-            zombies_[i]->Move(rand(), numOfLand_);
+            zombies_[i]->Move(GernateStep(), numOfLand_);
             map_->Update(*zombies_[i], i);
             PrintMap();
             PrintZombies();
             map_->Visit(*zombies_[i], i);
             printf("Zombie [%d] moves to land %d.\n", i, zombies_[i]->Locate());
+            if (UpdateGameStatus()) {/*Game finish*/ return;}
             system("Pause");
             system("CLS");
         }
     }
 }
-void Game::PlayerMove()
+int Game::GernateStep() const
 {
     srand(time(NULL));
-    player_->Move(rand(), numOfLand_);
-    map_->Update(*player_);
-    map_->Visit(*player_);
+    int step = 0;
+    while (step == 0)
+    {
+        step = rand() % numOfLand_;
+    }
+    return step;
 }
+void Game::PlayerMove()
+{
+    std::cout << "player loc : " << player_->Locate() << "\n";
+    player_->Move(GernateStep(), numOfLand_);
+    map_->Update(*player_);
+    std::cout << "player loc : " << player_->Locate() << "\n";
+    map_->Visit(*player_);
+    system("Pause");
+}
+
+bool Game::UpdateGameStatus()
+{
+    bool noPlants = true, noZombies = true;
+    std::cout << "Zombie\n";
+    for (size_t i = 0; i < numOfZombie_; ++i)
+    {
+        std::cout << i << " :" << zombies_[i]->HealthPoint() << "\n";
+        if (zombies_[i]->HealthPoint() > 0)
+        {
+            noZombies = false;
+            break;
+        }
+    }
+    if (noZombies) 
+    {
+        if (bombFlowerUsed_ <= numOfZombie_ / 2) {isWin_ = true;}
+        else {isLose_ = true;}
+        return true;
+    }
+    std::cout << "Plant\n";
+    for (size_t i = 0; i < numOfLand_; ++i)
+    {
+        std::cout << i << ": " << (map_->GetPlant(i))->Type() << "\n";
+        if ((map_->GetPlant(i)->Type()) != EMPTY)
+        {
+            noPlants = false;
+            break;
+        }
+    }
+    if (noPlants) 
+    {
+        isLose_ = true; 
+        return true;
+    }
+    return false;
+}
+
 void Game::Play()
 {
     PrintMap();
@@ -237,9 +294,10 @@ void Game::Play()
     PrintPlants();
     PlayerPlant();
     ZombiesMove();
+    if (Finish()) {return;}
     PlayerMove();
-    system("CLS");
 }
+
 Game::~Game()
 {
     delete player_;
