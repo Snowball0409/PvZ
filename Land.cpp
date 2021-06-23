@@ -46,6 +46,7 @@ bool Land::Visit(Player &player, Land* lands, const int &landN)
             break;
         case HEAL_PLANT:
             this->Healing(lands, landN, plant_->HealPoint());
+            std::cout << "All your plants have recoverd " << plant_->HealPoint() << " HP!" << std::endl;
             break;
         default:
             //do nothing
