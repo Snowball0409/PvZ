@@ -23,9 +23,9 @@ void Land::Planting(Plant* plant)
     delete tmp;
 }
 
-void Land::Visit(Player &player, Land* lands, const int &landN)
+bool Land::Visit(Player &player, Land* lands, const int &landN)
 {
-    //if plant exist&has visit method, visit
+    //if plant exist&has visit method, visit, and return true
     switch(plant_->Type())
     {
         case COIN_PLANT:
@@ -43,8 +43,9 @@ void Land::Visit(Player &player, Land* lands, const int &landN)
             break;
         default:
             //do nothing
-            break;
+            return false;
     }
+    return true;
 }
 
 void Land::Healing(Land* lands, const int &landN, const int &healPoint)
@@ -59,9 +60,9 @@ void Land::Healing(Land* lands, const int &landN, const int &healPoint)
     }
 }
 
-void Land::Visit(Zombie &zombie)
+bool Land::Visit(Zombie &zombie)
 {
-    //if plant exist, battle
+    //if plant exist, battle and return true
     if(plant_->Type()!=EMPTY)
     {
         //plant attack zombie
@@ -85,11 +86,12 @@ void Land::Visit(Zombie &zombie)
         {
             //if zombie not die& plant not dead, attack plant
             plant_->Injured(zombie.Damage());
-            std::cout << "Zombie eats plant " << plant_->Name() << "and causes damage " << zombie.Damage() << " .";
+            std::cout << "Zombie eats plant " << plant_->Name() << "and causes damage " << zombie.Damage() << " ." << std::endl;
             this->Update();
         }
-        
+        return true;
     }
+    return false;
 }
 
 void Land::Update()
