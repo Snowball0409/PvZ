@@ -18,8 +18,8 @@ class Land
 		~Land();
 		Plant* GetPlant();
 		void Planting(Plant* plant);
-		void Visit(Player &player, Land* lands, const int &landN);
-		void Visit(Zombie &zombie);
+		bool Visit(Player &player, Land* lands, const int &landN);
+		bool Visit(Zombie &zombie);
 		void Update();
 		void Replant();
 		void Healing(Land* lands, const int &landN, const int &healPoint);
