@@ -28,8 +28,8 @@ private:
     bool PlantActValid(int plantType);
     int GenerateStep() const;
     bool success_, isWin_, isLose_;
-    size_t numOfLands_, numOfZombies_, bombFlowerUsed_;;
-    int defaultAction_, plantMinCost_;
+    size_t numOfLands_, numOfZombies_, bombFlowerUsed_, defaultAction_;
+    int plantMinCost_;
     std::vector<Plant*> basicPlants_;
     std::vector<Zombie*> zombies_;
     Player *player_;
