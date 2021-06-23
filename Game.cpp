@@ -5,9 +5,9 @@
 #include <sstream>
 #include <cstdio>
 constexpr char Game::fileName[];
-Game::Game():success_{false}, numOfZombie_{DEFAULT_ZOMBIE}, numOfLand_{DEFAULT_LAND}, 
-plantMinCost_{INT_MAX}, lastAction_{NUM_OF_PLANT_TYPES}, isWin_{false}, isLose_{false},
-bombFlowerUsed_{0}
+Game::Game():success_{false}, isWin_{false}, isLose_{false},
+numOfLand_{DEFAULT_LAND}, numOfZombie_{DEFAULT_ZOMBIE}, bombFlowerUsed_{0},
+defaultAction_{NUM_OF_PLANT_TYPES}, plantMinCost_{INT_MAX}
 {
     std::ifstream inputFile(fileName, std::ios::in);
     if (!inputFile)
@@ -72,6 +72,7 @@ bombFlowerUsed_{0}
     }
     inputFile.close();
 }
+
 void Game::GameSetUp()
 {
     std::cout
@@ -131,10 +132,10 @@ bool Game::PlantActValid(int plantType)
         basicPlants_[HORN_PLANT]->Hp(), basicPlants_[HORN_PLANT]->Damage());
         break;
     default:
-        printf("Unknow Plant Type\n");
+        printf("Unknown Plant Type\n");
         break;
     }
-    if (player_->Planting(*landPlant))
+    if (landPlant && player_->Planting(*landPlant))
     {
         printf("You have planted %s at land %d !\n", (landPlant->Name()).c_str(), player_->Locate());
         map_->Planting(landPlant, player_->Locate());
@@ -150,37 +151,47 @@ bool Game::PlantActValid(int plantType)
 
 void Game::PlayerPlant()
 {
-    if (EnoughCost() && EmptyLand())
+    if (EnoughCost())
     {
-        bool optInValid = true;
-        do {
-            printf("Player $%d:\t Enter Your choice (4 to give up, default : %d)...>", player_->Money(), lastAction_);
-            size_t action = 0;
-            std::string userInput;
-            getline(std::cin, userInput);
-            std::istringstream iss(userInput);
-            iss >> action;
-            if (action >= NUM_OF_PLANT_TYPES) {action = lastAction_;}
-            if (action == NUM_OF_PLANT_TYPES)
-            {
-                //checkGame
-                std::cout << "You give up!\n";
-                optInValid = false;
-            }
-            else
-            {
-                //plant
-                if (PlantActValid(action))
+        if (EmptyLand())
+        {
+            bool optInValid = true;
+            do {
+                printf("Player $%d:\t Enter Your choice (4 to give up, default : %d)...>", player_->Money(), defaultAction_);
+                size_t action = 0;
+                std::string userInput;
+                getline(std::cin, userInput);
+                std::istringstream iss(userInput);
+                iss >> action;
+                if (action >= NUM_OF_PLANT_TYPES) {action = defaultAction_;}
+                if (action == NUM_OF_PLANT_TYPES)
                 {
+                    //checkGame
+                    std::cout << "You give up!\n";
                     optInValid = false;
-                    lastAction_ = action;
+                }
+                else
+                {
+                    //plant
+                    if (PlantActValid(action))
+                    {
+                        optInValid = false;
+                        defaultAction_ = action;
+                    }
                 }
             }
+            while (optInValid);
         }
-        while (optInValid);
+        else 
+        {
+            //No Land to Plant
+            system("CLS");
+            return;
+        }
     }
     else
     {
+        //No money to plant
         std::cout << "You don't have enough money to plant anything !\n";
     }
     system("Pause");
@@ -195,7 +206,8 @@ void Game::PrintMap() const
 void Game::PrintZombies() const
 {
     std::cout << "Zombie information:\n";
-    for (size_t i = 0; i < zombies_.size(); ++i) {
+    for (size_t i = 0; i < zombies_.size(); ++i)
+    {
         std::cout << "[" << i << "] " << *zombies_[i] << '\n';
     }
     std::cout << "===========================\n";
@@ -204,7 +216,8 @@ void Game::PrintZombies() const
 void Game::PrintPlants() const
 {
     //waiting for plain virtual show()
-    for (int i = 0; i < NUM_OF_PLANT_TYPES; ++i) {
+    for (size_t i = 0; i < NUM_OF_PLANT_TYPES; ++i)
+    {
         printf("[%d] ", i);
         basicPlants_[i]->Show();
     }
@@ -230,6 +243,7 @@ void Game::ZombiesMove()
         }
     }
 }
+
 int Game::GernateStep() const
 {
     srand(time(NULL));
@@ -240,23 +254,29 @@ int Game::GernateStep() const
     }
     return step;
 }
+
 void Game::PlayerMove()
 {
-    std::cout << "player loc : " << player_->Locate() << "\n";
+    // std::cout << "player loc : " << player_->Locate() << "\n";
     player_->Move(GernateStep(), numOfLand_);
     map_->Update(*player_);
-    std::cout << "player loc : " << player_->Locate() << "\n";
-    map_->Visit(*player_);
-    system("Pause");
+    PrintMap();
+    PrintZombies();
+    // std::cout << "player loc : " << player_->Locate() << "\n";
+    if (map_->Visit(*player_))
+    {
+        system("Pause");
+    }
+    system("CLS");
 }
 
 bool Game::UpdateGameStatus()
 {
     bool noPlants = true, noZombies = true;
-    std::cout << "Zombie\n";
-    for (size_t i = 0; i < numOfZombie_; ++i)
+    // std::cout << "Zombie\n";
+    for (size_t i = 0; i < zombies_.size(); ++i)
     {
-        std::cout << i << " :" << zombies_[i]->HealthPoint() << "\n";
+        // std::cout << i << " :" << zombies_[i]->HealthPoint() << "\n";
         if (zombies_[i]->HealthPoint() > 0)
         {
             noZombies = false;
@@ -269,10 +289,10 @@ bool Game::UpdateGameStatus()
         else {isLose_ = true;}
         return true;
     }
-    std::cout << "Plant\n";
+    // std::cout << "Plant\n";
     for (size_t i = 0; i < numOfLand_; ++i)
     {
-        std::cout << i << ": " << (map_->GetPlant(i))->Type() << "\n";
+        // std::cout << i << ": " << (map_->GetPlant(i))->Type() << "\n";
         if ((map_->GetPlant(i)->Type()) != EMPTY)
         {
             noPlants = false;
@@ -301,10 +321,12 @@ void Game::Play()
 Game::~Game()
 {
     delete player_;
-    for (size_t i = 0; i < zombies_.size(); ++i) {
+    for (size_t i = 0; i < zombies_.size(); ++i)
+    {
         delete zombies_[i];
     }
-    for (size_t i = 0; i < NUM_OF_PLANT_TYPES; ++i) {
+    for (size_t i = 0; i < NUM_OF_PLANT_TYPES; ++i)
+    {
         delete basicPlants_[i];
     }
     delete map_;

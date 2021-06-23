@@ -1,25 +1,29 @@
-#include <iostream>
 #include "Game.h"
-
+#include <iostream>
 using namespace std;
-
 int main()
 {
     Game game;
-    game.GameSetUp();
-    while (game.Success())
+    if (game.Success())
     {
-        game.Play();
-        if (game.IsWin())
+        while (1)
         {
-            game.PrintWin();
-            break;
+            game.Play();
+            if (game.IsWin())
+            {
+                game.PrintWin();
+                break;
+            }
+            else if (game.IsLose())
+            {
+                game.PrintLose();
+                break;
+            }
         }
-        else if (game.IsLose())
-        {
-            game.PrintLose();
-            break;
-        }
+    }
+    else
+    {
+        system("Pause");
     }
     return 0;
 }
