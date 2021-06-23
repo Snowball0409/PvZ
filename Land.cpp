@@ -40,7 +40,7 @@ bool Land::Visit(Player &player, Land* lands, const int &landN)
             else
             {
                 //visit message
-                std::cout << "You still need " << plant_->Visit()-plant_Step << " visit to earn money." << std::endl; 
+                std::cout << "You still need " << plant_->Visit()-plant_->Step() << " visit to earn money." << std::endl; 
             }
                 
             break;
