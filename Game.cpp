@@ -4,9 +4,14 @@
 #include <fstream>
 #include <sstream>
 #include <cstdio>
+#include <ctime>
+#include <cstdlib>
+#include <climits>
+
 constexpr char Game::fileName[];
+
 Game::Game():success_{false}, isWin_{false}, isLose_{false},
-numOfLand_{DEFAULT_LAND}, numOfZombie_{DEFAULT_ZOMBIE}, bombFlowerUsed_{0},
+numOfLands_{DEFAULT_LANDS}, numOfZombies_{DEFAULT_ZOMBIES}, bombFlowerUsed_{0},
 defaultAction_{NUM_OF_PLANT_TYPES}, plantMinCost_{INT_MAX}
 {
     std::ifstream inputFile(fileName, std::ios::in);
@@ -63,11 +68,11 @@ defaultAction_{NUM_OF_PLANT_TYPES}, plantMinCost_{INT_MAX}
             }
         }
         GameSetUp();
-        player_ = new Player(numOfLand_);
-        for (size_t i = 0; i < numOfZombie_; ++i) {
-            zombies_.push_back(new Zombie(numOfLand_));
+        player_ = new Player(numOfLands_);
+        for (size_t i = 0; i < numOfZombies_; ++i) {
+            zombies_.push_back(new Zombie(numOfLands_));
         }
-        map_ = new Map(numOfLand_, *player_, numOfZombie_, zombies_);
+        map_ = new Map(numOfLands_, *player_, numOfZombies_, zombies_);
         success_ = true;
     }
     inputFile.close();
@@ -85,17 +90,17 @@ void Game::GameSetUp()
     std::cout << "Number of lands on the map (1-10, default: 8)...>";
     std::getline(std::cin, userInput);
     iss.str(userInput);
-    iss >> numOfLand_;
+    iss >> numOfLands_;
     iss.clear();
     std::cout << "Number of zombies on the map (1-10, default: 3)...>";
     std::getline(std::cin, userInput);
     iss.str(userInput);
-    iss >> numOfZombie_;
+    iss >> numOfZombies_;
     iss.clear();
-    if (numOfLand_ < 1 || numOfLand_ > 10) {numOfZombie_ = DEFAULT_ZOMBIE;}
-    if (numOfZombie_ < 1 || numOfZombie_ > 10) {numOfLand_ = DEFAULT_LAND;}
+    if (numOfLands_ < MIN_LANDS || numOfLands_ > MAX_LANDS) {numOfLands_ = DEFAULT_LANDS;}
+    if (numOfZombies_ < MIN_ZOMBIES || numOfZombies_ > MAX_ZOMBIES) {numOfZombies_ = DEFAULT_ZOMBIES;}
     std::cout
-    << "=========================================================\n"
+    << "=============================================================================\n"
     << "Plants vs Zombies Rule:\n"
     << "How to win:\n"
     << "  (1) All zombies are dead.\n"
@@ -133,10 +138,13 @@ bool Game::PlantActValid(int plantType)
         basicPlants_[HORN_PLANT]->Hp(), basicPlants_[HORN_PLANT]->Damage());
         break;
     default:
-        printf("Unknown Plant Type\n");
         break;
     }
-    if (landPlant && player_->Planting(*landPlant))
+    if (!landPlant)
+    {
+        printf("Unknown Plant Type\n");
+    }
+    else if (player_->Planting(*landPlant))
     {
         printf("You have planted %s at land %d !\n", (landPlant->Name()).c_str(), player_->Locate());
         map_->Planting(landPlant, player_->Locate());
@@ -146,6 +154,7 @@ bool Game::PlantActValid(int plantType)
     {
         std::cout << "Not Enough Money! Please input again !\n";
         system("Pause");
+        std::cout << "\n\n";
     }
     return ret;
 }
@@ -187,8 +196,7 @@ void Game::PlayerPlant()
         else
         {
             //No money to plant
-            printf("Player $%d:\tYou don't have enough money to plant anything !\n");
-            // std::cout << "You don't have enough money to plant anything !\n";
+            printf("Player $%d:\tYou don't have enough money to plant anything !\n", player_->Money());
         }
         system("Pause");
         if (UpdateGameStatus()) {/*Game finish*/ return;}
@@ -230,8 +238,7 @@ void Game::ZombiesMove()
     {
         if (!zombies_[i]->IsDie())
         {
-            srand(time(NULL));
-            zombies_[i]->Move(GernateStep(), numOfLand_);
+            zombies_[i]->Move(GernateStep(), numOfLands_);
             map_->Update(*zombies_[i], i);
             PrintMap();
             PrintZombies();
@@ -250,7 +257,7 @@ int Game::GernateStep() const
     int step = 0;
     while (step == 0)
     {
-        step = rand() % numOfLand_;
+        step = rand() % numOfLands_;
     }
     return step;
 }
@@ -258,7 +265,7 @@ int Game::GernateStep() const
 void Game::PlayerMove()
 {
     // std::cout << "player loc : " << player_->Locate() << "\n";
-    player_->Move(GernateStep(), numOfLand_);
+    player_->Move(GernateStep(), numOfLands_);
     map_->Update(*player_);
     PrintMap();
     PrintZombies();
@@ -285,12 +292,12 @@ bool Game::UpdateGameStatus()
     }
     if (noZombies) 
     {
-        if (bombFlowerUsed_ <= numOfZombie_ / 2) {isWin_ = true;}
+        if (bombFlowerUsed_ <= numOfZombies_ / 2) {isWin_ = true;}
         else {isLose_ = true;}
         return true;
     }
     // std::cout << "Plant\n";
-    for (size_t i = 0; i < numOfLand_; ++i)
+    for (size_t i = 0; i < numOfLands_; ++i)
     {
         // std::cout << i << ": " << (map_->GetPlant(i))->Type() << "\n";
         if ((map_->GetPlant(i)->Type()) != EMPTY)
@@ -319,7 +326,7 @@ void Game::Play()
 void Game::PrintLose() const 
 {   
     std::cout << "\n\n";
-    if (bombFlowerUsed_ > numOfZombie_ / 2)
+    if (bombFlowerUsed_ > numOfZombies_ / 2)
     {
         std::cout << "You lose the game since you cannot use that much bomb plants!\n";
     }
