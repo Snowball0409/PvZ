@@ -92,7 +92,7 @@ bool Land::Visit(Zombie &zombie)
         {
             //if zombie not die& plant not dead, attack plant
             plant_->Injured(zombie.Damage());
-            std::cout << "Zombie eats plant " << plant_->Name() << "and causes damage " << zombie.Damage() << " ." << std::endl;
+            std::cout << "Zombie eats plant " << plant_->Name() << " and causes damage " << zombie.Damage() << " ." << std::endl;
             this->Update();
         }
         return true;
