@@ -30,8 +30,8 @@ class Map
 
 		void Update(Player &player);
 		void Update(Zombie &zombie, const int index);
-		void Visit(Player &player);
-		void Visit(Zombie &zombie, const int index);
+		bool Visit(Player &player);
+		bool Visit(Zombie &zombie, const int index);
 		static const int Random();
 		void Planting(Plant* plant, const int index);
 		Plant* GetPlant(const int index);

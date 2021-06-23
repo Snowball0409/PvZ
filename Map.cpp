@@ -36,14 +36,14 @@ void Map::Update(Zombie &zombie, const int index)
 	zombieLoc_[index] = zombie.Locate();
 }
 
-void Map::Visit(Player &player)
+bool Map::Visit(Player &player)
 {
-	lands_[playerLoc_].Visit(player, lands_, landN_);
+	return lands_[playerLoc_].Visit(player, lands_, landN_);
 }
 
-void Map::Visit(Zombie &zombie, const int index)
+bool Map::Visit(Zombie &zombie, const int index)
 {
-	lands_[zombieLoc_[index]].Visit(zombie);
+	return lands_[zombieLoc_[index]].Visit(zombie);
 }
 
 void Map::Planting(Plant* plant, const int index)
