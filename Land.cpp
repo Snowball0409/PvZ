@@ -37,6 +37,12 @@ bool Land::Visit(Player &player, Land* lands, const int &landN)
                 player.Reward(plant_->Reward());
                 std::cout << "You have earned $" << plant_->Reward() << "! Now you have $" << player.Money() << std::endl;
             }
+            else
+            {
+                //visit message
+                std::cout << "You still need " << plant_->Visit()-plant_->Step() << " visit to earn money." << std::endl; 
+            }
+                
             break;
         case HEAL_PLANT:
             this->Healing(lands, landN, plant_->HealPoint());
