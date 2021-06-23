@@ -238,7 +238,7 @@ void Game::ZombiesMove()
     {
         if (!zombies_[i]->IsDie())
         {
-            zombies_[i]->Move(GernateStep(), numOfLands_);
+            zombies_[i]->Move(GenerateStep(), numOfLands_);
             map_->Update(*zombies_[i], i);
             PrintMap();
             PrintZombies();
@@ -251,7 +251,7 @@ void Game::ZombiesMove()
     }
 }
 
-int Game::GernateStep() const
+int Game::GenerateStep() const
 {
     srand(time(NULL));
     int step = 0;
@@ -265,7 +265,7 @@ int Game::GernateStep() const
 void Game::PlayerMove()
 {
     // std::cout << "player loc : " << player_->Locate() << "\n";
-    player_->Move(GernateStep(), numOfLands_);
+    player_->Move(GenerateStep(), numOfLands_);
     map_->Update(*player_);
     PrintMap();
     PrintZombies();

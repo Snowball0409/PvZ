@@ -26,7 +26,7 @@ private:
     bool EnoughCost() const {return player_->Money() >= plantMinCost_;}
     bool EmptyLand() const {return ((map_->GetPlant(player_->Locate()))->Type()) == EMPTY;}
     bool PlantActValid(int plantType);
-    int GernateStep() const;
+    int GenerateStep() const;
     bool success_, isWin_, isLose_;
     size_t numOfLands_, numOfZombies_, bombFlowerUsed_;;
     int defaultAction_, plantMinCost_;
