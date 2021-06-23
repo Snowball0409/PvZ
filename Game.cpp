@@ -76,9 +76,10 @@ defaultAction_{NUM_OF_PLANT_TYPES}, plantMinCost_{INT_MAX}
 void Game::GameSetUp()
 {
     std::cout
-    << "------------------------------\n"
-    << "|     Plants vs. Zombies     |\n"
-    << "------------------------------\n";
+    << "-----------------------------\n"
+    << "|          TEAM 2           |\n"
+    << "|     Plants vs. Zombies    |\n"
+    << "-----------------------------\n";
     std::string userInput;
     std::istringstream iss;
     std::cout << "Number of lands on the map (1-10, default: 8)...>";
@@ -151,51 +152,48 @@ bool Game::PlantActValid(int plantType)
 
 void Game::PlayerPlant()
 {
-    if (EnoughCost())
+    if (EmptyLand())
     {
-        if (EmptyLand())
+        PrintMap();
+        PrintZombies();
+        PrintPlants();
+        if (EnoughCost())
         {
-            bool optInValid = true;
+            bool actInvalid = true;
             do {
                 printf("Player $%d:\t Enter Your choice (4 to give up, default : %d)...>", player_->Money(), defaultAction_);
-                size_t action = 0;
+                size_t action = defaultAction_;
                 std::string userInput;
                 getline(std::cin, userInput);
                 std::istringstream iss(userInput);
                 iss >> action;
-                if (action >= NUM_OF_PLANT_TYPES) {action = defaultAction_;}
+                if (action > NUM_OF_PLANT_TYPES) {action = defaultAction_;}
                 if (action == NUM_OF_PLANT_TYPES)
                 {
-                    //checkGame
                     std::cout << "You give up!\n";
-                    optInValid = false;
+                    actInvalid = false;
                 }
                 else
                 {
                     //plant
                     if (PlantActValid(action))
                     {
-                        optInValid = false;
+                        actInvalid = false;
                         defaultAction_ = action;
                     }
                 }
-            }
-            while (optInValid);
+            } while (actInvalid);   
         }
-        else 
+        else
         {
-            //No Land to Plant
-            system("CLS");
-            return;
+            //No money to plant
+            printf("Player $%d:\tYou don't have enough money to plant anything !\n");
+            // std::cout << "You don't have enough money to plant anything !\n";
         }
+        system("Pause");
+        if (UpdateGameStatus()) {/*Game finish*/ return;}
+        system("CLS");
     }
-    else
-    {
-        //No money to plant
-        std::cout << "You don't have enough money to plant anything !\n";
-    }
-    system("Pause");
-    system("CLS");
 }
 
 void Game::PrintMap() const 
@@ -208,14 +206,16 @@ void Game::PrintZombies() const
     std::cout << "Zombie information:\n";
     for (size_t i = 0; i < zombies_.size(); ++i)
     {
-        std::cout << "[" << i << "] " << *zombies_[i] << '\n';
+        if (!zombies_[i]->IsDie())
+        {
+            std::cout << "[" << i << "] " << *zombies_[i] << '\n';
+        }
     }
     std::cout << "===========================\n";
 }
 
 void Game::PrintPlants() const
 {
-    //waiting for plain virtual show()
     for (size_t i = 0; i < NUM_OF_PLANT_TYPES; ++i)
     {
         printf("[%d] ", i);
@@ -309,13 +309,31 @@ bool Game::UpdateGameStatus()
 
 void Game::Play()
 {
-    PrintMap();
-    PrintZombies();
-    PrintPlants();
     PlayerPlant();
+    if (Finish()) {return;}
     ZombiesMove();
     if (Finish()) {return;}
     PlayerMove();
+}
+
+void Game::PrintLose() const 
+{   
+    std::cout << "\n\n";
+    if (bombFlowerUsed_ > numOfZombie_ / 2)
+    {
+        std::cout << "You lose the game since you cannot use that much bomb plants!\n";
+    }
+    else
+    {
+        std::cout << "Oh no.. You have no plant on the map ...\n";
+    }
+    system("Pause");
+}
+
+void Game::PrintWin() const
+{
+    std::cout << "\n\nCongratulations You have kill all zombies!\n";
+    system("Pause");
 }
 
 Game::~Game()

@@ -1,5 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
+
 #include "Game.h"
 #include "Player.h"
 #include "Zombie.h"
@@ -12,6 +13,7 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
+
 class Game
 {
 private:
@@ -23,11 +25,11 @@ private:
     void PlayerMove();
     void PlayerPlant();
     bool UpdateGameStatus();
-    int GernateStep() const;
     bool Finish() const {return isWin_ || isLose_;}
     bool EnoughCost() const {return player_->Money() > plantMinCost_;}
     bool EmptyLand() const {return ((map_->GetPlant(player_->Locate()))->Type()) == EMPTY;}
     bool PlantActValid(int plantType);
+    int GernateStep() const;
     bool success_, isWin_, isLose_;
     size_t numOfLand_, numOfZombie_, bombFlowerUsed_;;
     int defaultAction_, plantMinCost_;
@@ -43,8 +45,9 @@ public:
     void Play();
     bool IsWin() const {return isWin_;}
     bool IsLose() const {return isLose_;}
-    void PrintLose() const {std::cout << "Oh no.. You have no plant on the map ...\n"; system("Pause");}
-    void PrintWin() const {std::cout << "Congratulations You have kill all zombies!\n"; system("Pause");}
+    void PrintLose() const;
+    void PrintWin() const;
     bool Success() const {return success_;}
 };
+
 #endif
