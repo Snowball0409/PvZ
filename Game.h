@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Game.h"
 #include "Player.h"
 #include "Zombie.h"
 #include "Map.h"
