@@ -69,7 +69,8 @@ plantMinCost_{INT_MAX}
         }
         GameSetUp();
         player_ = new Player(numOfLands_);
-        for (size_t i = 0; i < numOfZombies_; ++i) {
+        for (size_t i = 0; i < numOfZombies_; ++i)
+        {
             zombies_.push_back(new Zombie(numOfLands_));
         }
         map_ = new Map(numOfLands_, *player_, numOfZombies_, zombies_);
@@ -171,7 +172,7 @@ void Game::PlayerPlant()
             bool actInvalid = true;
             size_t action = defaultAction_;
             do {
-                printf("Player $%d:\t Enter Your choice (4 to give up, default : %d)...>", player_->Money(), defaultAction_);
+                printf("Player $%d:\t Enter Your choice (4 to give up, default : %zu)...>", player_->Money(), defaultAction_);
                 std::string userInput;
                 getline(std::cin, userInput);
                 std::istringstream iss(userInput);
@@ -196,7 +197,7 @@ void Game::PlayerPlant()
         else
         {
             //No money to plant
-            printf("Player $%d:\tYou don't have enough money to plant anything !\n", player_->Money());
+            printf("You don't have enough money to plant anything !\n");
         }
         system("Pause");
         if (UpdateGameStatus()) {return;} /*Game finish*/
@@ -242,8 +243,8 @@ void Game::ZombiesMove()
             map_->Update(*zombies_[i], i);
             PrintMap();
             PrintZombies();
-            map_->Visit(*zombies_[i], i);
             printf("Zombie [%d] moves to land %d.\n", i, zombies_[i]->Locate());
+            map_->Visit(*zombies_[i], i);
             if (UpdateGameStatus()) {return;} /*Game finish*/
             system("Pause");
             system("CLS");
