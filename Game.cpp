@@ -172,7 +172,10 @@ void Game::PlayerPlant()
             bool actInvalid = true;
             size_t action = defaultAction_;
             do {
-                printf("Player $%d:\t Enter Your choice (4 to give up, default : %zu)...>", player_->Money(), defaultAction_);
+                std::cout << "Player $" << player_->Money() 
+                << ":\t Enter Your choice (4 to give up, default : " 
+                << defaultAction_
+                << ")...>";
                 std::string userInput;
                 getline(std::cin, userInput);
                 std::istringstream iss(userInput);
@@ -248,6 +251,10 @@ void Game::ZombiesMove()
             if (UpdateGameStatus()) {return;} /*Game finish*/
             system("Pause");
             system("CLS");
+        }
+        else
+        {
+            map_->Update(*zombies_[i], i);
         }
     }
 }
