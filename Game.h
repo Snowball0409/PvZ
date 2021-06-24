@@ -26,13 +26,13 @@ private:
     bool EmptyLand() const {return ((map_->GetPlant(player_->Locate()))->Type()) == EMPTY;}
     bool PlantActValid(int plantType);
     int GenerateStep() const;
-    bool success_, isWin_, isLose_;
-    size_t numOfLands_, numOfZombies_, bombFlowerUsed_, defaultAction_;
-    int plantMinCost_;
+    bool success_ = false, isWin_ = false, isLose_ = false;
+    size_t numOfLands_ = 0, numOfZombies_ = 0, bombFlowerUsed_ = 0, defaultAction_ = 0;
+    int plantMinCost_ = INT_MAX;
     std::vector<Plant*> basicPlants_;
     std::vector<Zombie*> zombies_;
-    Player *player_;
-    Map *map_;
+    Player *player_ = nullptr;
+    Map *map_ = nullptr;
     static constexpr size_t DEFAULT_LANDS = 8, DEFAULT_ZOMBIES = 3, NUM_OF_PLANT_TYPES = 4,
     MIN_LANDS = 1, MAX_LANDS = 10, MIN_ZOMBIES = 1, MAX_ZOMBIES = 10;
     static constexpr char fileName[] = "plants.txt";
