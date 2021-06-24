@@ -48,6 +48,9 @@ bool Land::Visit(Player &player, Land* lands, const int &landN)
             this->Healing(lands, landN, plant_->HealPoint());
             std::cout << "All your plants have recoverd " << plant_->HealPoint() << " HP!" << std::endl;
             break;
+        case HORN_PLANT:
+            std::cout << "Your " << plant_->Name() << " is guarding your land." << std::endl;
+            break;
         default:
             //do nothing
             return false;
