@@ -7,7 +7,7 @@
 
 class HornPlant: public Plant{
     private:
-        int damage_;                                          
+        int damage_ = 0;                                          
     public:
         virtual int Damage()const override{return damage_;}
         HornPlant() : damage_(10){}

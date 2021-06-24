@@ -8,9 +8,9 @@
 
 class CoinPlant: public Plant{
     private:
-        int reward_;
-        int visit_;
-        int step_;
+        int reward_ = 0;
+        int visit_ = 0;
+        int step_ = 0;
     public:
         virtual int Reward()const override{return reward_;}
         virtual int Visit()const override{return visit_;}

@@ -7,7 +7,7 @@
 
 class HealPlant: public Plant{
     private:
-        int healPoint_;
+        int healPoint_ = 0;
     public:
         virtual int HealPoint()const override{return healPoint_;}
         HealPlant() : healPoint_(20){}

@@ -6,7 +6,7 @@
 
 class BombPlant: public Plant{
     private:
-        int damage_;
+        int damage_ = 0;
     public:
         virtual int Damage()const override{return damage_;}
         BombPlant() : damage_(50){}

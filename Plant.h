@@ -18,8 +18,8 @@ static std::string plantName[PLANT_NUMBER]={"Mushroom","Hornflower","Bombflower"
 
 class Plant{
     private:
-        int price_;
-        int hp_;
+        int price_ = 0;
+        int hp_ = 0;
         enum plantType type_ = EMPTY ;
         std::string name_ = "Empty";
     public:
