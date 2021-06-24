@@ -1,6 +1,6 @@
 #include "Map.h"  
 	
-Map::Map(const int landN, const Player &player, const int zombieN, const std::vector<Zombie*> &zombies)
+Map::Map(const int landN, const Player &player, const int zombieN, const std::vector<Zombie*> &zombies):landN_(landN),zombieN_(zombieN)
 {
 	lands_ = new Land[landN];
 	playerLoc_ = player.Locate();
@@ -9,9 +9,6 @@ Map::Map(const int landN, const Player &player, const int zombieN, const std::ve
 	{
 		zombieLoc_[i] = zombies[i]->Locate();
 	}
-
-	landN_ = landN;
-	zombieN_ = zombieN;
 }
 	
 Map::~Map()
@@ -60,7 +57,12 @@ std::ostream& operator <<(std::ostream& os, const Map &map)
 		(map.playerLoc_==i)?os << "*":os << " ";
 		for(size_t j = 0; j < map.zombieN_; ++ j)
 		{
-			(map.zombieLoc_[j]==i)?os << std::to_string(j):os << " ";
+			if(map.zombieLoc_[j]==i)
+				os << std::to_string(j)
+			else if(map.zombieLoc_[j]==-1)
+				break;
+			else
+				os << " ";
 		}
 		os << "}";
 		os << map.lands_[i] << std::endl;

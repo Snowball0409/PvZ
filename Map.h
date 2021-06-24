@@ -16,12 +16,12 @@ class Map
 	friend std::ostream& operator <<(std::ostream& os, const Map &map);
 
 	private:
-		Land* lands_;
-		int playerLoc_;
-		int* zombieLoc_;
+		Land* lands_ = NULL;
+		int playerLoc_ = 0;
+		int* zombieLoc_ = NULL;
 
-		int landN_;
-		int zombieN_;
+		const int landN_ = 0;
+		const int zombieN_ = 0;
 
 	public:
 
