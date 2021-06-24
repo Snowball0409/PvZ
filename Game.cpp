@@ -6,7 +6,6 @@
 #include <cstdio>
 #include <ctime>
 #include <cstdlib>
-#include <climits>
 
 constexpr char Game::fileName[];
 

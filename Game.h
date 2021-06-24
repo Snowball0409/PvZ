@@ -9,6 +9,7 @@
 #include "HealPlant.h"
 #include "HornPlant.h"
 #include <vector>
+#include <climits>
 
 class Game
 {
