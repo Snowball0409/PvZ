@@ -11,7 +11,7 @@ class Land
 	friend std::ostream& operator <<(std::ostream &os, const Land &land);
 
 	private:
-		Plant* plant_;
+		Plant* plant_ = NULL;
 
 	public:
 		Land();
