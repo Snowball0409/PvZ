@@ -58,11 +58,11 @@ std::ostream& operator <<(std::ostream& os, const Map &map)
 		for(size_t j = 0; j < map.zombieN_; ++ j)
 		{
 			if(map.zombieLoc_[j]==i)
-				os << std::to_string(j)
-			else if(map.zombieLoc_[j]==-1)
-				break;
-			else
+				os << std::to_string(j);
+			else if(map.zombieLoc_[j]!=-1)
 				os << " ";
+			else
+				continue;
 		}
 		os << "}";
 		os << map.lands_[i] << std::endl;
