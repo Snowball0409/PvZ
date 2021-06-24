@@ -60,7 +60,12 @@ std::ostream& operator <<(std::ostream& os, const Map &map)
 		(map.playerLoc_==i)?os << "*":os << " ";
 		for(size_t j = 0; j < map.zombieN_; ++ j)
 		{
-			(map.zombieLoc_[j]==i)?os << std::to_string(j):os << " ";
+			if(map.zombieLoc_[j]==i)
+				os << std::to_string(j)
+			else if(map.zombieLoc_[j]==-1)
+				break;
+			else
+				os << " ";
 		}
 		os << "}";
 		os << map.lands_[i] << std::endl;
