@@ -9,9 +9,9 @@ class Zombie
 	friend std::ostream &operator <<(std::ostream &os, const Zombie &zombie);
 
 	private:
-		int hp_;
-		int loc_;
-		const int damage_;
+		int hp_ = 0;
+		int loc_ = 0;
+		const int damage_ = 0;
 
 	public:
 
