@@ -247,14 +247,17 @@ void Game::ZombiesMove()
             PrintZombies();
             printf("Zombie [%d] moves to land %d.\n", i, zombies_[i]->Locate());
             map_->Visit(*zombies_[i], i);
+            map_->Update(*zombies_[i], i);
             if (UpdateGameStatus()) {return;} /*Game finish*/
             system("Pause");
             system("CLS");
         }
-        else
-        {
-            map_->Update(*zombies_[i], i);
-        }
+        // else
+        // {
+        //     map_->Update(*zombies_[i], i);
+        //     std::cout << "Zombie die\n";
+        //     PrintMap();
+        // }
     }
 }
 
