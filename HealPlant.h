@@ -7,14 +7,14 @@
 
 class HealPlant: public Plant{
     private:
-        int healPoint_;
+        int healPoint_ = 0;
     public:
         virtual int HealPoint()const override{return healPoint_;}
         HealPlant() : healPoint_(20){}
         HealPlant(int price, int hp, int healPoint) : Plant(price, hp, HEAL_PLANT, plantName[HEAL_PLANT]), healPoint_(healPoint){}
         HealPlant(int price, int hp, int healPoint, std::string name) : Plant(price, hp, HEAL_PLANT, name), healPoint_(healPoint){}
         ~HealPlant();
-        void Show()override;
+        void Show()const override;
 };
 
 

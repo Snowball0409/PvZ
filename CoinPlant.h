@@ -8,9 +8,9 @@
 
 class CoinPlant: public Plant{
     private:
-        int reward_;
-        int visit_;
-        int step_;
+        int reward_ = 0;
+        int visit_ = 0;
+        int step_ = 0;
     public:
         virtual int Reward()const override{return reward_;}
         virtual int Visit()const override{return visit_;}
@@ -20,7 +20,7 @@ class CoinPlant: public Plant{
         CoinPlant(int price, int hp, int reward, int visit) : Plant(price, hp, COIN_PLANT, plantName[COIN_PLANT]), reward_(reward), step_(visit), visit_(visit){}
         CoinPlant(int price, int hp, int reward, int visit, std::string name) : Plant(price, hp, COIN_PLANT, name), reward_(reward), step_(visit), visit_(visit){}
         ~CoinPlant();
-        void Show() override;
+        void Show()const override;
 };
 
 #endif

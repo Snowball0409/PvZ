@@ -7,7 +7,7 @@ BombPlant::~BombPlant(){
 
 }
 
-void BombPlant:: Show(){
+void BombPlant:: Show()const{
     std::cout << Name() << " $" << Price() << " HP: " << MAX_HP[Type()] <<" - gives "
     << Damage() << " damage points" << std::endl;
 }

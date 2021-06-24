@@ -7,7 +7,7 @@ HornPlant::~HornPlant(){
 
 }
 
-void HornPlant::Show(){
+void HornPlant::Show()const{
     std::cout << Name() << " $" << Price() << " HP: " << MAX_HP[Type()] << " - gives "
     << Damage() << " damage points" << std::endl;
 }
