@@ -14,7 +14,7 @@ class HornPlant: public Plant{
         HornPlant(int price, int hp, int damage) : Plant(price, hp, HORN_PLANT, plantName[HORN_PLANT]), damage_(damage){}
         HornPlant(int price, int hp, int damage, std::string name) : Plant(price, hp, HORN_PLANT, name), damage_(damage){}
         ~HornPlant();
-        void Show()override;
+        void Show()const override;
 };
 
 #endif

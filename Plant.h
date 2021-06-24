@@ -40,7 +40,7 @@ class Plant{
         virtual int Reward()const{return 0;}
         virtual int HealPoint()const{return 0;}
         virtual void Visiting(){}
-        virtual void Show(){}
+        virtual void Show()const{}
 };
 
 #endif
