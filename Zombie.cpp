@@ -24,6 +24,7 @@ void Zombie::Damaged(const int damage)
 bool Zombie::IsDie()
 {
     if(hp_ <= 0)
+        loc_ = -1;
         return true;
     return false;
 }
