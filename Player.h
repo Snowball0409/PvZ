@@ -21,8 +21,8 @@ class Player
     protected:
 
     private:
-        int money_;
-        int loc_;
+        int money_ = 0;
+        int loc_ = 0;
 };
 
 #endif // PLAYER_H
