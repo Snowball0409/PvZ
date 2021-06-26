@@ -232,7 +232,8 @@ void Game::ZombiesMove()
     {
         if (!zombies_[i]->IsDie())
         {
-            zombies_[i]->Move(GenerateStep(), numOfLands_);
+            srand(time(NULL));
+            zombies_[i]->Move(rand() % ZOMBIE_MAX_MOVE + 1, numOfLands_);
             map_->Update(*zombies_[i], i);
             PrintMap();
             PrintZombies();
@@ -246,20 +247,10 @@ void Game::ZombiesMove()
     }
 }
 
-int Game::GenerateStep() const
-{
-    srand(time(NULL));
-    int step = 0;
-    while (step == 0)
-    {
-        step = rand() % numOfLands_;
-    }
-    return step;
-}
-
 void Game::PlayerMove()
 {
-    player_->Move(GenerateStep(), numOfLands_);
+    srand(time(NULL));
+    player_->Move(rand() % PLAYER_MAX_MOVE + 1, numOfLands_);
     map_->Update(*player_);
     PrintMap();
     PrintZombies();

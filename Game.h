@@ -26,7 +26,6 @@ private:
     bool EnoughCost() const {return player_->Money() >= plantMinCost_;}
     bool EmptyLand() const {return ((map_->GetPlant(player_->Locate()))->Type()) == EMPTY;}
     bool PlantActValid(int plantType);
-    int GenerateStep() const;
     bool success_ = false, isWin_ = false, isLose_ = false;
     size_t numOfLands_ = 0, numOfZombies_ = 0, bombFlowerUsed_ = 0, defaultAction_ = 0;
     int plantMinCost_ = INT_MAX;
@@ -35,7 +34,7 @@ private:
     Player *player_ = nullptr;
     Map *map_ = nullptr;
     static constexpr size_t DEFAULT_LANDS = 8, DEFAULT_ZOMBIES = 3, NUM_OF_PLANT_TYPES = 4,
-    MIN_LANDS = 1, MAX_LANDS = 10, MIN_ZOMBIES = 1, MAX_ZOMBIES = 10;
+    MIN_LANDS = 1, MAX_LANDS = 10, MIN_ZOMBIES = 1, MAX_ZOMBIES = 10, PLAYER_MAX_MOVE = 6, ZOMBIE_MAX_MOVE = 3;
     static constexpr char fileName[] = "plants.txt";
 public:
     Game();
